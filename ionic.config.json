@@ -1,0 +1,7 @@
+{
+  "name": "pokebuilder",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
