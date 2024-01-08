@@ -1,0 +1,15 @@
+<ion-header class="menu">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button *ngIf="!isMenuOpen" (click)="toggleMenu()">
+        <ion-icon slot="icon-only" name="menu"></ion-icon>
+      </ion-button>
+      <ion-item *ngIf="isMenuOpen" >
+        <ion-button (click) ="onAboutClick()">About</ion-button>
+        <ion-button *ngIf="!isLoginPage()" (click) = "onPokedexClick()">Pokedex</ion-button>
+        <ion-button *ngIf="!isLoginPage()" (click) = "onTeamClick()">Equipos</ion-button>
+      </ion-item>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
