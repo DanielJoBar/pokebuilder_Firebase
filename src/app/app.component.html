@@ -1,3 +1,8 @@
 <ion-app>
+  <app-navigation></app-navigation>
+  <app-user-session *ngIf="(auth.isLogged$ | async) && (auth.user$ | async)"
+  [username]="(auth.user$ | async)!.username"
+  (onLogOffListener) ="onSignOut()"
+  ></app-user-session>
   <ion-router-outlet></ion-router-outlet>
 </ion-app>

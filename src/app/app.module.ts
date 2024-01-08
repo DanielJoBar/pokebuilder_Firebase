@@ -6,12 +6,39 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { AboutPipe } from './about.pipe';
+import { AuthService } from './core/servicies/auth.service';
+import { JwtService } from './core/servicies/jwt.service';
+import { ApiService } from './core/servicies/api.service';
+import { AuthStrapiService } from './core/servicies/auth-strapi.service';
+import { HttpClientWebProvider } from './core/servicies/http-client-web.provider';
+import { HttpClientProvider } from './core/servicies/http-client.provider';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { NavigationComponent } from './shared/components/navigation/navigation.component';
+import { SharedModule } from './shared/shared.module';
+
+function AuthServiceFactory(jwtSvc: JwtService, apiSvc: ApiService) {
+  return new AuthStrapiService(jwtSvc, apiSvc);
+}
+function HttpClientWebFactory(http: HttpClient) {
+  return new HttpClientWebProvider(http);
+}
 
 @NgModule({
-  declarations: [AppComponent, AboutPipe],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  declarations: [AppComponent,NavigationComponent],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,HttpClientModule,SharedModule],
+  providers: [
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    {
+      provide: AuthService,
+      deps: [JwtService, ApiService],
+      useFactory: AuthServiceFactory,
+    },
+    {
+      provide: HttpClientProvider,
+      deps: [HttpClient],
+      useFactory: HttpClientWebFactory,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
