@@ -10,7 +10,23 @@ const routes: Routes = [
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
+  },  {
+    path: 'about',
+    loadChildren: () => import('./pages/about/about.module').then( m => m.AboutPageModule)
   },
+  {
+    path: 'login',
+    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'pokedex',
+    loadChildren: () => import('./pages/pokedex/pokedex.module').then( m => m.PokedexPageModule)
+  },
+  {
+    path: 'team-builder',
+    loadChildren: () => import('./pages/team-builder/team-builder.module').then( m => m.TeamBuilderPageModule)
+  },
+
 ];
 
 @NgModule({

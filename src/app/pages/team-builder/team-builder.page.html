@@ -1,0 +1,7 @@
+<ion-content>
+  <app-pokemon-team
+  *ngFor="let team of (teamScv.pokeTeam$ | async)"
+  [team]="team"
+  >
+  </app-pokemon-team>
+</ion-content>
