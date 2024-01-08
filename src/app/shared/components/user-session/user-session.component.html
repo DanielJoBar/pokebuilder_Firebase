@@ -1,0 +1,11 @@
+<ion-item (click)="ShowLogOff()">
+  <ion-avatar aria-hidden="true" slot="start">
+    <img alt="" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+  </ion-avatar>
+  <ion-label>{{username | primeraLetraMayuscula}}</ion-label>
+</ion-item>
+<ion-item *ngIf="logoff">
+  <ion-label (click)="OnLogOff()">
+    Cerrar sesión
+  </ion-label>
+</ion-item>
