@@ -1,16 +1,22 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
-@Pipe({
-  name: 'primeraLetraMayuscula'
+@Component({
+  selector: 'app-user-session',
+  templateUrl: './user-session.component.html',
+  styleUrls: ['./user-session.component.scss'],
 })
-export class PrimeraLetraMayusculaPipe implements PipeTransform {
+export class UserSessionComponent  implements OnInit {
+  logoff:boolean|null = false;
+  @Input() username:string = "Username"
+  @Output() onLogOffListener: EventEmitter<void> = new EventEmitter<void>()
+  constructor() { }
 
-
-  transform(element?:string): string {
- 
-    if (element){
-     return (element[0]+".").toUpperCase()} else return ""
- }
-
-
+  ngOnInit() {}
+  ShowLogOff(){
+    this.logoff = true;
+  }
+  OnLogOff(){
+    this.onLogOffListener.emit()
+    this.logoff = false
+  }
 }

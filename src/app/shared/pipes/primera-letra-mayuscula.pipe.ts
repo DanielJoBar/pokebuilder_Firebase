@@ -5,8 +5,10 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class PrimeraLetraMayusculaPipe implements PipeTransform {
 
-  transform(value: unknown, ...args: unknown[]): unknown {
-    return null;
-  }
 
+  transform(element?:string): string {
+ 
+    if (element){
+     return (element[0]+".").toUpperCase()} else return ""
+ }
 }

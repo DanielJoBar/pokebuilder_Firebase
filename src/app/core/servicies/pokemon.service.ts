@@ -3,7 +3,7 @@ import { HttpClientProvider } from './http-client.provider';
 import { BehaviorSubject, Observable, map, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Pokemon } from '../interfaces/pokemon';
-import { PokemonApi } from '../interfaces/pokemonApi';
+import { PokemonApi } from '../interfaces/pokemon-api';
 import { HttpClient } from '@angular/common/http';
 import { ApiService } from './api.service';
 
