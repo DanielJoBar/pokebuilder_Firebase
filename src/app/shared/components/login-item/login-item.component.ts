@@ -4,8 +4,8 @@ import { UserCredentials } from 'src/app/core/interfaces/user-credentials';
 import { UserRegisterInfo } from 'src/app/core/interfaces/user-register-info';
 @Component({
   selector: 'app-login-form',
-  templateUrl: './login-form.component.html',
-  styleUrls: ['./login-form.component.scss'],
+  templateUrl: './login-item.component.html',
+  styleUrls: ['./login-item.component.scss'],
 })
 export class LoginFormComponent implements OnInit {
   form: FormGroup | null = null;
