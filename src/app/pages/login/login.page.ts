@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserCredentials } from 'src/app/core/interfaces/user-credentials';
 import { UserRegisterInfo } from 'src/app/core/interfaces/user-register-info';
 import { AuthStrapiService } from 'src/app/core/servicies/auth-strapi.service';
@@ -11,15 +11,22 @@ import { AuthService } from 'src/app/core/servicies/auth.service';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  constructor(private author: AuthService, private router: Router) {}
+  private redirectUrl:string ="";
+  constructor(private author: AuthService,private route:ActivatedRoute, private router: Router) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.author.isLogged$.subscribe(user=>{
+        if(user){
+          this.router.navigate(['home'])
+        }
+    })
+  }
   onLogin(credentialsData: UserCredentials) {
     this.author.login(credentialsData).subscribe({
-      next: (data) => {
+      next:data => {
         this.router.navigate(['home']);
       },
-      error: (err) => {
+      error:err => {
         console.log('Eror en el inicio de sesion, no existe el usuario', err);
       },
     });

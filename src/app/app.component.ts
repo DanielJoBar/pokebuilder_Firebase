@@ -13,7 +13,7 @@ export class AppComponent {
 
   onSignOut() {
     this.auth.logout().subscribe(async (_) => {
-      await this.router.navigate(['/login']);
+      this.router.navigate(['/login']);
     });
   }
 }

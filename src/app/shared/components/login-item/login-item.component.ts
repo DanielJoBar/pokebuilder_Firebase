@@ -35,7 +35,9 @@ export class LoginFormComponent implements OnInit {
       name:['', [Validators.required]]
     });
   }
-  ngOnInit() {}
+  ngOnInit() {
+    
+  }
 
   //Emite los datos introducidos en el formulario de login
   onSubmit() {

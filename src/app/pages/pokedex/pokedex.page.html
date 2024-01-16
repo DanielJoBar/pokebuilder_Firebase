@@ -1,9 +1,10 @@
 
 <ion-content [fullscreen]="true">
-  
+  <ion-button expand="block">Block</ion-button>
   <app-pokemon-item
     *ngFor="let pokemon of (pokemons.pokemon$ | async)"
     [pokemon]="pokemon"
   ></app-pokemon-item>
   <!--(onPokemonClicked)="onPokemonClicked(pokemon)"-->
+
 </ion-content>

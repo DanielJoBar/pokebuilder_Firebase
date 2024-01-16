@@ -6,7 +6,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   styleUrls: ['./user-session.component.scss'],
 })
 export class UserSessionComponent  implements OnInit {
-  logoff:boolean|null = false;
+  logoff:boolean|null = true;
+  logged:boolean =true;
   @Input() username:string = "Username"
   @Output() onLogOffListener: EventEmitter<void> = new EventEmitter<void>()
   constructor() { }
@@ -18,5 +19,6 @@ export class UserSessionComponent  implements OnInit {
   OnLogOff(){
     this.onLogOffListener.emit()
     this.logoff = false
+    this.logged = false
   }
 }

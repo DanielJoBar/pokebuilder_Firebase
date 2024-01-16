@@ -38,6 +38,14 @@ function HttpClientWebFactory(http: HttpClient) {
       deps: [HttpClient],
       useFactory: HttpClientWebFactory,
     },
+    {
+      provide: 'login',
+      useValue:'/login'
+    },
+    {
+      provide: 'afterLogin',
+      useValue:'/home'
+    },
   ],
   bootstrap: [AppComponent],
 })
