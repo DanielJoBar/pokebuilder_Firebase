@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserCredentials } from 'src/app/core/interfaces/user-credentials';
 import { UserRegisterInfo } from 'src/app/core/interfaces/user-register-info';
+import { PasswordValidation } from 'src/app/core/validators/password';
 @Component({
   selector: 'app-login-form',
   templateUrl: './login-item.component.html',
@@ -9,14 +10,15 @@ import { UserRegisterInfo } from 'src/app/core/interfaces/user-register-info';
 })
 export class LoginFormComponent implements OnInit {
   form: FormGroup | null = null;
-  registerForm:FormGroup;
-  showLoginForm:Boolean = true;
-  showRegisterForm:Boolean = false;
+  registerForm: FormGroup;
+  showLoginForm: Boolean = true;
+  showRegisterForm: Boolean = false;
   @Input() username: string = '';
   @Input() password: string = '';
-  @Input() email:    string = '';
-  @Input() name:     string = '';
-  @Input() surname:  string = '';
+  @Input() confirm: string = '';
+  @Input() email: string = '';
+  @Input() name: string = '';
+  @Input() surname: string = '';
   @Input() nickname: string = '';
   @Output() onsubmit = new EventEmitter<UserCredentials>();
   @Output() onregistersubmit = new EventEmitter<UserRegisterInfo>();
@@ -27,17 +29,27 @@ export class LoginFormComponent implements OnInit {
       password: ['', [Validators.required]],
     });
     //Construye el formulario de registro con los siguientes parámetros
-    this.registerForm = this.formBuilder.group({
-      username: ['', [Validators.required]],
-      email:    ['', [Validators.required]],
-      password:['', [Validators.required]],
-      surname:['', [Validators.required]],
-      name:['', [Validators.required]]
-    });
+    this.registerForm = this.formBuilder.group(
+      {
+        username: ['', [Validators.required]],
+        email: ['', [Validators.required]],
+        password: [
+          '',
+          [Validators.required, PasswordValidation.passwordProto('password')],
+        ],
+        confirm: [
+          '',
+          [Validators.required, PasswordValidation.passwordProto('confirm')],
+        ],
+        surname: ['', [Validators.required]],
+        name: ['', [Validators.required]],
+      },
+      {
+        validator: [PasswordValidation.passwordMatch('password', 'confirm')],
+      }
+    );
   }
-  ngOnInit() {
-    
-  }
+  ngOnInit() {}
 
   //Emite los datos introducidos en el formulario de login
   onSubmit() {
@@ -51,7 +63,7 @@ export class LoginFormComponent implements OnInit {
     this.showRegisterForm = !this.showRegisterForm;
   }
 
-    //Emite los datos introducidos en el formulario de registro
+  //Emite los datos introducidos en el formulario de registro
   onRegisterSubmit() {
     this.onregistersubmit.emit(this.registerForm.value);
   }

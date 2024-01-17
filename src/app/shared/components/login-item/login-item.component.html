@@ -47,7 +47,7 @@
       (click)="onSubmit()"
       >Acceder</ion-button
     >
-    <ion-button (click)="toggleForms()">Registro</ion-button>
+    <ion-button (click)="toggleForms()">Registrarse</ion-button>
   </div>
 </form>
 <form
@@ -56,91 +56,110 @@
   (ngSubmit)="onRegisterSubmit()"
 >
   <ion-title>Registro</ion-title>
-  <ion-item>
-    <ion-grid>
-      <ion-row class="ion-align-items-center">
-        <ion-col size="4">
-          <label>Nombre</label>
-        </ion-col>
-        <ion-col size="8">
-          <ion-input
-            placeholder="Inserte aquí su nombre"
-            labelPlacement="start"
-            formControlName="name"
-            type="text"
-          ></ion-input>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-item>
-  <ion-item>
-    <ion-grid>
-      <ion-row class="ion-align-items-center">
-        <ion-col size="4">
-          <label>Apellidos</label>
-        </ion-col>
-        <ion-col size="8">
-          <ion-input
-            placeholder="Inserte aquí su apellido/s"
-            labelPlacement="start"
-            formControlName="surname"
-            type="text"
-          ></ion-input>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-item>
-  <ion-item>
-    <ion-grid>
-      <ion-row class="ion-align-items-center">
-        <ion-col size="4">
-          <label>Nombre de cuenta</label>
-        </ion-col>
-        <ion-col size="8">
-          <ion-input
-            placeholder="Usuario"
-            labelPlacement="start"
-            formControlName="username"
-            type="text"
-          ></ion-input>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-item>
-  <ion-item>
-    <ion-grid>
-      <ion-row class="ion-align-items-center">
-        <ion-col size="4">
-          <label>Correo Electrónico</label>
-        </ion-col>
-        <ion-col size="8">
-          <ion-input
-            placeholder="example@gmail.com"
-            labelPlacement="start"
-            formControlName="email"
-            type="text"
-          ></ion-input>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-item>
-  <ion-item>
-    <ion-grid>
-      <ion-row class="ion-align-items-center">
-        <ion-col size="4">
-          <label>Contraseña</label>
-        </ion-col>
-        <ion-col size="8">
-          <ion-input
-            placeholder="contraseña"
-            labelPlacement="start"
-            formControlName="password"
-            type="text"
-          ></ion-input>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-item>
+  <div>
+    <ion-item>
+      <ion-grid>
+        <ion-row class="ion-align-items-center">
+          <ion-col size="4">
+            <label>Nombre</label>
+          </ion-col>
+          <ion-col size="8">
+            <ion-input
+              placeholder="Inserte aquí su nombre"
+              labelPlacement="start"
+              formControlName="name"
+              type="text"
+            ></ion-input>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+    <ion-item>
+      <ion-grid>
+        <ion-row class="ion-align-items-center">
+          <ion-col size="4">
+            <label>Apellidos</label>
+          </ion-col>
+          <ion-col size="8">
+            <ion-input
+              placeholder="Inserte aquí su apellido/s"
+              labelPlacement="start"
+              formControlName="surname"
+              type="text"
+            ></ion-input>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+    <ion-item>
+      <ion-grid>
+        <ion-row class="ion-align-items-center">
+          <ion-col size="4">
+            <label>Nombre de cuenta</label>
+          </ion-col>
+          <ion-col size="8">
+            <ion-input
+              placeholder="Usuario"
+              labelPlacement="start"
+              formControlName="username"
+              type="text"
+            ></ion-input>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+    <ion-item>
+      <ion-grid>
+        <ion-row class="ion-align-items-center">
+          <ion-col size="4">
+            <label>Correo Electrónico</label>
+          </ion-col>
+          <ion-col size="8">
+            <ion-input
+              placeholder="example@gmail.com"
+              labelPlacement="start"
+              formControlName="email"
+              type="text"
+            ></ion-input>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+    <ion-item>
+      <ion-grid>
+        <ion-row class="ion-align-items-center">
+          <ion-col size="4">
+            <label>Contraseña</label>
+          </ion-col>
+          <ion-col size="8">
+            <ion-input
+              placeholder="contraseña"
+              labelPlacement="start"
+              formControlName="password"
+              type="text"
+            ></ion-input>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+    <ion-item>
+      <ion-grid>
+        <ion-row class="ion-align-items-center">
+          <ion-col size="4">
+            <label>Repita contraseña</label>
+          </ion-col>
+          <ion-col size="8">
+            <ion-input
+              placeholder="contraseña"
+              labelPlacement="start"
+              formControlName="confirm"
+              type="text"
+            ></ion-input>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+  </div>
   <ion-button [disabled]="!registerForm.valid" (click)="onRegisterSubmit()"
     >Registrarse
   </ion-button>
