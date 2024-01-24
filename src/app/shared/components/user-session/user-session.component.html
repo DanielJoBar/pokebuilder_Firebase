@@ -1,11 +1,15 @@
-<ion-item (click)="ShowLogOff()" *ngIf="logged">
-  <ion-avatar aria-hidden="true" slot="start">
-    <img alt="" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-  </ion-avatar>
-  <ion-label>{{username | primeraLetraMayuscula}}</ion-label>
-</ion-item>
-<ion-item *ngIf="logoff">
-  <ion-label (click)="OnLogOff()">
-    Cerrar sesión
-  </ion-label>
-</ion-item>
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button color="primary"></ion-menu-button>
+    </ion-buttons>
+    <div slot="end">
+      <ion-item (click)="ShowLogOff()" *ngIf="logged">
+        <ion-avatar aria-hidden="true" slot="start">
+          <img alt="" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+        </ion-avatar>
+        <ion-label>{{username | primeraLetraMayuscula}}</ion-label>
+      </ion-item>
+    </div>
+  </ion-toolbar>
+</ion-header>

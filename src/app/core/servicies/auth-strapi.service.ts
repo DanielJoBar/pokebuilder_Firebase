@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, lastValueFrom, map, tap } from 'rxjs';
+import { BehaviorSubject, Observable, delay, lastValueFrom, map, tap } from 'rxjs';
 import { UserCredentials } from '../interfaces/user-credentials';
 import { UserRegisterInfo } from '../interfaces/user-register-info';
 import { JwtService } from './jwt.service';
@@ -49,7 +49,10 @@ export class AuthStrapiService extends AuthService {
         next: async (data: StrapiLoginResponse) => {
           await lastValueFrom(this.jwtSvc.saveToken(data.jwt));
           let connected = data && data.jwt != '';
-          this._isLogged.next(connected);
+          this.me().subscribe(userMe=>{
+            this._isLogged.next(connected);
+            this._user.next(userMe);
+          })
 
           obs.next();
           obs.complete();
@@ -62,6 +65,7 @@ export class AuthStrapiService extends AuthService {
   }
 
   logout(): Observable<void> {
+    this._isLogged.next(false);
     return this.jwtSvc.destroyToken().pipe(
       map((_) => {
         return;
@@ -79,7 +83,10 @@ export class AuthStrapiService extends AuthService {
       this.apiSvc.post('/auth/local/register', _userInfo).subscribe({
         next: async (data: StrapiRegisterResponse) => {
           let connected = data && data.jwt != '';
-          this._isLogged.next(connected);
+          this.me().subscribe(userMe=>{
+            this._isLogged.next(connected);
+            this._user.next(userMe);
+          })
           await lastValueFrom(this.jwtSvc.saveToken(data.jwt));
           const _extended_user: StrapiExtendedUser = {
             data: {

@@ -1,0 +1,27 @@
+
+ion-content{
+    --background: url('../assets/cckctj1j.png') no-repeat 100% 50%;
+}
+ion-item {
+    left: 9.5%;
+    width: 80.5%;
+    
+  --ion-item-background: #00ff04;
+  color: black;
+}
+
+#itemTop{
+    border-top-left-radius: 12%;
+    border-top-right-radius: 12%;
+}
+#itemBot{
+    border-bottom-left-radius: 12%;
+    border-bottom-right-radius: 12%;
+}
+
+.listStyle{
+    background-image: url('../assets/cckctj1j.png') 0 0/100% 100% no-repeat;
+}
+.menuStyle{
+      margin-top: 85%;
+}

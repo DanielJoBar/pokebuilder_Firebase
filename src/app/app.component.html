@@ -1,8 +1,29 @@
 <ion-app>
-  <app-navigation></app-navigation>
-  <app-user-session *ngIf="(auth.isLogged$ | async) && (auth.user$ | async)"
-  [username]="(auth.user$ | async)!.username"
-  (onLogOffListener) ="onSignOut()"
-  ></app-user-session>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-menu #menu content-id="main-content" type="reveal" swipeGesture="false">
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-button (click)="menu.close()"><ion-icon slot="icon-only" name="close"></ion-icon></ion-button>
+        </ion-buttons>
+        <ion-title >Menu Title</ion-title>
+      </ion-toolbar>
+    </ion-header>
+      <ion-content class="ion-padding" >
+        <ion-list list style="background-color:transparent" lines="none" class="menuStyle">
+          <ion-item  (click)="menu.close()" [routerLink]="['/about']" class="itemStyle" id="itemTop" >About</ion-item>
+          <ion-item  *ngIf="!isLoginPage()" (click)="menu.close()"[routerLink]="['/home']" class="itemStyle">Home</ion-item>
+          <ion-item  *ngIf="!isLoginPage()"  (click)="menu.close()"[routerLink]="['/pokedex']"  class="itemStyle">Pokedex</ion-item>
+          <ion-item *ngIf="!isLoginPage()"  (click)="menu.close()" [routerLink]="['/team-builder']"  class="itemStyle">Equipos</ion-item>
+          <ion-item *ngIf="!isLoginPage()"  (click)="onSignOut(menu)" [routerLink]="['/login']"  class="itemStyle"id="itemBot">Cerrar sesion</ion-item>
+        </ion-list>
+      </ion-content>
+  </ion-menu>
+  <div class="ion-page" id="main-content">
+      <app-user-session *ngIf="(auth.isLogged$ | async) && (auth.user$ | async)"
+        [username]="(auth.user$ | async)!.username"
+        (onLogOffListener) ="onSignOut(menu)">
+      </app-user-session>
+    <ion-router-outlet></ion-router-outlet> 
+  </div>
 </ion-app>
+

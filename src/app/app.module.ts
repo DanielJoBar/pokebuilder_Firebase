@@ -13,7 +13,6 @@ import { AuthStrapiService } from './core/servicies/auth-strapi.service';
 import { HttpClientWebProvider } from './core/servicies/http-client-web.provider';
 import { HttpClientProvider } from './core/servicies/http-client.provider';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { NavigationComponent } from './shared/components/navigation/navigation.component';
 import { SharedModule } from './shared/shared.module';
 
 function AuthServiceFactory(jwtSvc: JwtService, apiSvc: ApiService) {
@@ -24,7 +23,7 @@ function HttpClientWebFactory(http: HttpClient) {
 }
 
 @NgModule({
-  declarations: [AppComponent,NavigationComponent],
+  declarations: [AppComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,HttpClientModule,SharedModule],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

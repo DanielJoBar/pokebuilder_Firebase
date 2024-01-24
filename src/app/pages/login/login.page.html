@@ -1,14 +1,9 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>PokeBuilder</ion-title>
-  </ion-toolbar>
-</ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-card class="Carta-Login" color="danger">
-    <app-login-form 
-    (onsubmit)="onLogin($event)"
-    (onregistersubmit)="onRegister($event)"
+    <app-login-form
+      (onsubmit)="onLogin($event)"
+      (onregistersubmit)="onRegister($event)"
     ></app-login-form>
   </ion-card>
 </ion-content>

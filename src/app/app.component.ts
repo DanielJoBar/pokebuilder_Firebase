@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AuthService } from './core/servicies/auth.service';
 import { Router } from '@angular/router';
 import { IonMenu } from '@ionic/angular';
+import { delay } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -10,10 +11,14 @@ import { IonMenu } from '@ionic/angular';
 })
 export class AppComponent {
   constructor(protected auth: AuthService, private router: Router) {}
-
-  onSignOut() {
+  onSignOut(menu:IonMenu) {
     this.auth.logout().subscribe(async (_) => {
-      this.router.navigate(['/login']);
+      await this.router.navigate(['/login']);
+      menu.close();
     });
+  }
+  isLoginPage(): boolean {
+    
+    return this.router.url.includes('login');
   }
 }

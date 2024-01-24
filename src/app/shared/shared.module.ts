@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { UserSessionComponent } from './components/user-session/user-session.component';
 import { PrimeraLetraMayusculaPipe } from './pipes/primera-letra-mayuscula.pipe';
+
 @NgModule({
   declarations: [UserSessionComponent,PrimeraLetraMayusculaPipe],
   imports: [
@@ -17,7 +18,6 @@ import { PrimeraLetraMayusculaPipe } from './pipes/primera-letra-mayuscula.pipe'
     IonicModule,
     ReactiveFormsModule,
     UserSessionComponent,
-    
   ]
 })
 export class SharedModule { }
