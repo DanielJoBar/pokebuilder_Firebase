@@ -24,18 +24,19 @@ export class PokemonService {
    * 
    */
   public getAll(userId: number): Observable<Pokemon[]> {
-    return this.apiSvc.get(`/pokemons?populate=user&filters[user]=${userId}`).pipe(
+    console.log("Entra en el getAll");
+    return this.apiSvc.get(`/pokemons?populate=user&filters[user=${userId}]`).pipe(
       map((pokemons: PokemonApi) => {
+        console.log("El pokemon que llega es: "+pokemons);
           return pokemons.data.map((dataPoke: any) => ({
-            id: dataPoke.id,
-            name: dataPoke.attributes.name,
-            hp: dataPoke.attributes.hp,
-            atk: dataPoke.attributes.atk,
-            def: dataPoke.attributes.def,
-            speAtk: dataPoke.attributes.speAtk,
-            speDef: dataPoke.attributes.speDef,
-            speed: dataPoke.attributes.speed,
-            bst: dataPoke.attributes.bst,
+            name: dataPoke.name,
+            hp: dataPoke.hp,
+            atk: dataPoke.atk,
+            def: dataPoke.def,
+            speAtk: dataPoke.speAtk,
+            speDef: dataPoke.speDef,
+            speed: dataPoke.speed,
+            bst: dataPoke.bst,
           }));
       }),
       tap((individual) => {
@@ -46,9 +47,8 @@ export class PokemonService {
   public getOne(id: number): Observable<Pokemon> {
     return this.apiSvc.get(`/pokemons/${id}`).pipe(
       map((pokemon: PokemonApi) => {
-        var atributos = pokemon.data[id].attributes;
+        var atributos = pokemon.data[id];
         return {
-          id: pokemon.data[id].id,
           name: atributos.name,
           hp: atributos.hp,
           atk: atributos.atk,

@@ -1,15 +1,24 @@
 
 ion-content{
-    --background: url('../assets/cckctj1j.png') no-repeat 100% 50%;
+
 }
 ion-item {
     left: 9.5%;
     width: 80.5%;
-    
+    top:20%;
   --ion-item-background: #00ff04;
   color: black;
+  --padding-top:1.7%;
+  --padding-bottom:1.7%;
 }
-
+.consola{
+    width: 100%;
+    height: 100%;
+    background: url('../assets/cckctj1j.png') no-repeat;
+    background-size: 100%;
+    background-position-y:top;
+    position: relative;
+}
 #itemTop{
     border-top-left-radius: 12%;
     border-top-right-radius: 12%;
@@ -23,6 +32,8 @@ ion-item {
     background-image: url('../assets/cckctj1j.png') 0 0/100% 100% no-repeat;
 }
 .menuStyle{
-      margin-top: 3vh;
+      top:100px;
+      width: 90%;
+      position:absolute;
       opacity: 50%;
 }

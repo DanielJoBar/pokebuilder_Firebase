@@ -36,7 +36,6 @@ export class ApiService {
 
   get(path:string, params:any = {}):Observable<any>{
     var url = `${environment.API_URL}${path}`;
-    
     return this.http.get(url, params, this.getHeader(url));
   }
   

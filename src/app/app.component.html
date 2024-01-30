@@ -9,13 +9,15 @@
       </ion-toolbar>
     </ion-header>
       <ion-content class="ion-padding" >
-        <ion-list list style="background-color:transparent" lines="none" class="menuStyle">
-          <ion-item  (click)="menu.close()" [routerLink]="['/about']" class="itemStyle" id="itemTop" >About</ion-item>
-          <ion-item  *ngIf="!isLoginPage()" (click)="menu.close()"[routerLink]="['/home']" class="itemStyle">Home</ion-item>
-          <ion-item  *ngIf="!isLoginPage()"  (click)="menu.close()"[routerLink]="['/pokedex']"  class="itemStyle">Pokedex</ion-item>
-          <ion-item *ngIf="!isLoginPage()"  (click)="menu.close()" [routerLink]="['/team-builder']"  class="itemStyle">Equipos</ion-item>
-          <ion-item *ngIf="!isLoginPage()"  (click)="onSignOut(menu)" [routerLink]="['/login']"  class="itemStyle"id="itemBot">Cerrar sesion</ion-item>
-        </ion-list>
+        <div class="consola">
+          <ion-list list style="background-color:transparent" lines="none" class="menuStyle">
+            <ion-item  (click)="menu.close()" [routerLink]="['/about']" class="itemStyle" id="itemTop" >About</ion-item>
+            <ion-item  *ngIf="!isLoginPage()" (click)="menu.close()"[routerLink]="['/home']" class="itemStyle">Home</ion-item>
+            <ion-item  *ngIf="!isLoginPage()"  (click)="menu.close()"[routerLink]="['/pokedex']"  class="itemStyle">Pokedex</ion-item>
+            <ion-item *ngIf="!isLoginPage()"  (click)="menu.close()" [routerLink]="['/team-builder']"  class="itemStyle">Equipos</ion-item>
+            <ion-item *ngIf="!isLoginPage()"  (click)="onSignOut(menu)" [routerLink]="['/login']"  class="itemStyle"id="itemBot">Cerrar sesion</ion-item>
+          </ion-list>
+        </div>
       </ion-content>
   </ion-menu>
   <div class="ion-page" id="main-content">

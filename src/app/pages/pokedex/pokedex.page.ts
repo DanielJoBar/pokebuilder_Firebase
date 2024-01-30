@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { IonModal, ModalController, ToastController } from '@ionic/angular';
 import { PokemonService } from 'src/app/core/servicies/pokemon.service';
+import { OverlayEventDetail } from '@ionic/core/components';
+import { PokedexFormComponent } from 'src/app/shared/components/pokedex-form/pokedex-form.component';
 
 @Component({
   selector: 'app-pokedex',
@@ -8,10 +11,20 @@ import { PokemonService } from 'src/app/core/servicies/pokemon.service';
 })
 export class PokedexPage implements OnInit {
 
-  constructor(protected pokemons:PokemonService) { }
+  constructor(protected pokemons:PokemonService,private modalCtrl: ModalController) { }
 
   ngOnInit() {
-    this.pokemons.getAll(16).subscribe
+    this.pokemons.getAll(1).subscribe()
   }
+  async openModal() {
+    const modal = await this.modalCtrl.create({
+      component: PokedexFormComponent,
+    });
+    modal.present();
 
+    const { data, role } = await modal.onWillDismiss();
+    if (role === 'confirm') {
+      var datos = data ;
+    }
+  }
 }

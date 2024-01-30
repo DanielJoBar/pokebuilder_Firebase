@@ -4,9 +4,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { UserSessionComponent } from './components/user-session/user-session.component';
 import { PrimeraLetraMayusculaPipe } from './pipes/primera-letra-mayuscula.pipe';
+import { PokedexFormComponent } from './components/pokedex-form/pokedex-form.component';
 
 @NgModule({
-  declarations: [UserSessionComponent,PrimeraLetraMayusculaPipe],
+  declarations: [UserSessionComponent,PrimeraLetraMayusculaPipe,PokedexFormComponent],
   imports: [
     CommonModule,
     IonicModule,
