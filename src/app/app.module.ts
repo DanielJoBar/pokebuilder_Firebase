@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
@@ -24,7 +24,13 @@ function HttpClientWebFactory(http: HttpClient) {
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,HttpClientModule,SharedModule],
+  imports: [
+    BrowserModule,
+    IonicModule.forRoot(),
+    AppRoutingModule,
+    HttpClientModule,
+    SharedModule,
+  ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     {
@@ -39,11 +45,11 @@ function HttpClientWebFactory(http: HttpClient) {
     },
     {
       provide: 'login',
-      useValue:'/login'
+      useValue: '/login',
     },
     {
       provide: 'afterLogin',
-      useValue:'/home'
+      useValue: '/home',
     },
   ],
   bootstrap: [AppComponent],

@@ -6,6 +6,7 @@ import { Pokemon } from '../interfaces/pokemon';
 import { PokemonApi } from '../interfaces/pokemon-api';
 import { HttpClient } from '@angular/common/http';
 import { ApiService } from './api.service';
+import { StrapiLoginPayload } from '../interfaces/strapi';
 
 @Injectable({
   providedIn: 'root',
@@ -23,28 +24,62 @@ export class PokemonService {
    }
    * 
    */
-  public getAll(userId: number): Observable<Pokemon[]> {
-    console.log("Entra en el getAll");
-    return this.apiSvc.get(`/pokemons?populate=user&filters[user=${userId}]`).pipe(
-      map((pokemons: PokemonApi) => {
-        console.log("El pokemon que llega es: "+pokemons);
-          return pokemons.data.map((dataPoke: any) => ({
-            name: dataPoke.name,
-            hp: dataPoke.hp,
-            atk: dataPoke.atk,
-            def: dataPoke.def,
-            speAtk: dataPoke.speAtk,
-            speDef: dataPoke.speDef,
-            speed: dataPoke.speed,
-            bst: dataPoke.bst,
-          }));
-      }),
-      tap((individual) => {
-        this._pokemon.next(individual);
+
+   getTodo(): Observable<PokemonApi> {
+    return this.apiSvc.get('/pokemons').pipe(
+      map((info: PokemonApi) => {
+        const dataPokemon = info.data;
+        const transformedPokemons: Pokemon[] = dataPokemon.map((algo: Pokemon) => {
+          return {
+            id: algo.id,
+            attributes: {
+              name: algo.attributes.name,
+              hp: algo.attributes.hp,
+              atk: algo.attributes.atk,
+              def: algo.attributes.def,
+              speAtk: algo.attributes.speAtk,
+              speDef: algo.attributes.speDef,
+              speed: algo.attributes.speed,
+              bst: algo.attributes.bst,
+            }
+          };
+        });
+        
+        // Actualizamos data en info
+        const transformedInfo: PokemonApi = {
+          data: transformedPokemons,
+          meta: info.meta
+        };
+        
+        // Devolvemos la información transformada
+        return transformedInfo;
       })
     );
   }
-  public getOne(id: number): Observable<Pokemon> {
+  
+
+  /*public getAll(userId: number): Observable<Pokemon[]> {
+    console.log('Entra en el getAll');
+    return this.apiSvc.get(`/pokemons`).pipe(
+      map((data: PokemonApi) => {
+        return data.data.map((pokemon:any) => {
+          return {
+            id:pokemon.id,
+            name: pokemon.attributes.name,
+            hp: pokemon.attributes.hp,
+            atk: pokemon.attributes.atk,
+            def: pokemon.attributes.def,
+            speAtk: pokemon.attributes.speAtk,
+            speDef: pokemon.attributes.speDef,
+            speed: pokemon.attributes.speed,
+            bst: pokemon.attributes.bst,
+          }
+        })
+      })
+    );
+
+  }*/
+  /*public getOne(id: number): Observable<Pokemon> {
     return this.apiSvc.get(`/pokemons/${id}`).pipe(
       map((pokemon: PokemonApi) => {
         var atributos = pokemon.data[id];
@@ -60,13 +95,13 @@ export class PokemonService {
         };
       })
     );
-  }
+  }*/
   public deleteOne(pokemon: Pokemon): Observable<Pokemon> {
     return new Observable<Pokemon>((obs) => {
       this.apiSvc
         .delete(environment.API_URL + `/pokemons/${pokemon.id}`)
         .subscribe((observer) => {
-          this.getAll(1).subscribe((_) => {
+          this.getTodo().subscribe((_) => {
             obs.next(pokemon);
           });
         });
@@ -77,7 +112,7 @@ export class PokemonService {
       this.apiSvc
         .patch(environment.API_URL + `/pokemons/${pokemon.id}`, pokemon)
         .subscribe((observer) => {
-          this.getAll(1).subscribe((_) => {
+          this.getTodo().subscribe((_) => {
             obs.next(pokemon);
           });
         });

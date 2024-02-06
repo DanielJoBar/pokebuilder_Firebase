@@ -3,6 +3,8 @@ import { IonModal, ModalController, ToastController } from '@ionic/angular';
 import { PokemonService } from 'src/app/core/servicies/pokemon.service';
 import { OverlayEventDetail } from '@ionic/core/components';
 import { PokedexFormComponent } from 'src/app/shared/components/pokedex-form/pokedex-form.component';
+import { Pokemon } from 'src/app/core/interfaces/pokemon';
+import { PokemonApi } from 'src/app/core/interfaces/pokemon-api';
 
 @Component({
   selector: 'app-pokedex',
@@ -10,21 +12,34 @@ import { PokedexFormComponent } from 'src/app/shared/components/pokedex-form/pok
   styleUrls: ['./pokedex.page.scss'],
 })
 export class PokedexPage implements OnInit {
+  pokemons: Pokemon[] = [];
 
-  constructor(protected pokemons:PokemonService,private modalCtrl: ModalController) { }
+  constructor(
+    protected pokemonSvc: PokemonService,
+    private modalCtrl: ModalController
+  ) {}
 
   ngOnInit() {
-    this.pokemons.getAll(1).subscribe()
+    this.pokemonSvc.getTodo().subscribe((result: PokemonApi) => {
+      this.pokemons = result.data;
+    });
   }
-  async openModal() {
+
+  async openModal(pokemon?: Pokemon) {
     const modal = await this.modalCtrl.create({
       component: PokedexFormComponent,
+      componentProps: {
+        pokemon: pokemon,
+      },
     });
     modal.present();
 
     const { data, role } = await modal.onWillDismiss();
     if (role === 'confirm') {
-      var datos = data ;
+      var datos = data;
     }
+  }
+  onPokemonClicked(pokemon: Pokemon) {
+    this.openModal(pokemon);
   }
 }

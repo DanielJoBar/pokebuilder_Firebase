@@ -1,7 +1,29 @@
-<ion-item>
-  <ion-card (click)='onPokemonClick($event)'class="card">
-      <label>
-        {{pokemon.name}}     {{pokemon.hp}}    {{pokemon.atk}}    {{pokemon.def}}    {{pokemon.speAtk}}   {{pokemon.speDef}}   {{pokemon.speed}}   {{pokemon.bst}}
-      </label>
-  </ion-card>
+<ion-item (click)='onPokemonClick($event)'>
+    <ion-grid>
+      <ion-col size="4">
+        {{pokemon.attributes.name}} 
+      </ion-col>
+      <ion-col size="5">
+        {{pokemon.attributes.hp}} 
+      </ion-col>
+      <ion-col size="1">
+        {{pokemon.attributes.atk}}
+      </ion-col>
+      <ion-col size="1">
+        {{pokemon.attributes.def}}
+      </ion-col>
+      <ion-col size="1">
+        {{pokemon.attributes.speAtk}}
+      </ion-col>
+      <ion-col size="1">
+        {{pokemon.attributes.speDef}}
+      </ion-col>
+      <ion-col size="1">
+        {{pokemon.attributes.speed}}
+      </ion-col>
+      <ion-col size="2">
+        {{pokemon.attributes.bst}}
+      </ion-col>
+    </ion-grid>
+
 </ion-item>

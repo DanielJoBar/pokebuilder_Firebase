@@ -5,16 +5,24 @@
     <ion-button class="button" expand="full">-</ion-button>
   </div>
   <ion-grid>
-    <ion-col size="6"  size-md="4">
+    <ion-col size="6"  >
       <p>Texto columna 1</p>
-        <app-pokemon-item
-          *ngFor="let pokemon of (pokemons.pokemon$ | async)"
-          [pokemon]="pokemon"
-        ></app-pokemon-item>
+      <app-pokemon-item
+        *ngFor="let pokemon of pokemons"
+        [pokemon] = "pokemon"
+        (onPokemonClicked)="onPokemonClicked(pokemon)"
+        >
+      </app-pokemon-item>
     </ion-col>
-    <ion-col size="6" size-md="8">
+    <ion-col size="6" >
       <p>Texto columna 2</p>
+      <app-pokemon-item
+        *ngFor="let pokemon of pokemons"
+        [pokemon] = "pokemon"
+        (onPokemonClicked)="onPokemonClicked(pokemon)"
+        >
+      </app-pokemon-item>
     </ion-col>
 </ion-grid>
-  <!--(onPokemonClicked)="onPokemonClicked(pokemon)"-->
+ 
 </ion-content>

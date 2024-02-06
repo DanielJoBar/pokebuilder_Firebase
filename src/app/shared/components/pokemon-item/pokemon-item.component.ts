@@ -10,18 +10,12 @@ import { PokemonService } from 'src/app/core/servicies/pokemon.service';
 export class PokemonItemComponent  implements OnInit {
 
 
-  @Input() pokemon:Pokemon={
-    id: 0,
-    name: 'ninguno',
-    hp: 0,
-    atk: 0,
-    def: 0,
-    speAtk: 0,
-    speDef: 0,
-    speed: 0,
-    bst:0
-  }
+  @Input() pokemon!:Pokemon;
+  
   @Output() onPokemonClicked:EventEmitter<void> = new EventEmitter<void>()
+  PokemonItemComponent(pokemonSvc:PokemonService){
+
+  }
   ngOnInit() {
     
   }
