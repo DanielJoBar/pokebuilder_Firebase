@@ -56,7 +56,29 @@ export class PokemonService {
       })
     );
   }
-  
+  public createOne(pokemon:Pokemon): Observable<Pokemon>{
+    var _newPokemon = pokemon;
+    return new Observable<Pokemon>((obs) => {
+      this.apiSvc
+        .post(environment.API_URL + `/pokemons/`,_newPokemon)
+        .subscribe((observer) => {
+          this.getTodo().subscribe((_) => {
+            obs.next(_newPokemon);
+          });
+        });
+    });
+  }
+  public deleteOne(pokemon: Pokemon): Observable<Pokemon> {
+    return new Observable<Pokemon>((obs) => {
+      this.apiSvc
+        .delete(environment.API_URL + `/pokemons/${pokemon.id}`)
+        .subscribe((observer) => {
+          this.getTodo().subscribe((_) => {
+            obs.next(pokemon);
+          });
+        });
+    });
+  }
 
   /*public getAll(userId: number): Observable<Pokemon[]> {
     console.log('Entra en el getAll');
@@ -96,17 +118,7 @@ export class PokemonService {
       })
     );
   }*/
-  public deleteOne(pokemon: Pokemon): Observable<Pokemon> {
-    return new Observable<Pokemon>((obs) => {
-      this.apiSvc
-        .delete(environment.API_URL + `/pokemons/${pokemon.id}`)
-        .subscribe((observer) => {
-          this.getTodo().subscribe((_) => {
-            obs.next(pokemon);
-          });
-        });
-    });
-  }
+  
   public updateOne(pokemon: Pokemon): Observable<Pokemon> {
     return new Observable<Pokemon>((obs) => {
       this.apiSvc

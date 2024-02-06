@@ -10,47 +10,54 @@ import { numericValidator } from 'src/app/core/validators/numeric';
   styleUrls: ['./pokedex-form.component.scss'],
 })
 export class PokedexFormComponent implements OnInit {
-  @Input() mode:'New'|'Edit' = 'New';
-  form:FormGroup;
-  pokemon:Pokemon | null = null;
-  @Input() set pkm(_pkm:Pokemon|null) {
-    if(_pkm){
-      this.pokemon = _pkm;
-      this.form.controls['name'].setValue(_pkm.attributes.name);
-      this.form.controls['hp'].setValue(_pkm.attributes.hp);
-      this.form.controls['atk'].setValue(_pkm.attributes.atk);
-      this.form.controls['def'].setValue(_pkm.attributes.def);
-      this.form.controls['speAtk'].setValue(_pkm.attributes.speAtk);
-      this.form.controls['speDef'].setValue(_pkm.attributes.speDef);
-      this.form.controls['speed'].setValue(_pkm.attributes.speed);
-      this.form.controls['img' as string].setValue(_pkm.attributes.image);
-      this.mode = 'Edit';
-    }
+  @Input() mode: 'New' | 'Edit' = 'New';
+  form: FormGroup;
+  pokemon: Pokemon | null = null;
+
+  constructor(
+    private modalCtrl: ModalController,
+    private formBuilder: FormBuilder,
+    private toastController: ToastController
+  ) {
+    this.form = this.formBuilder.group({
+      name: ['', Validators.required],
+      hp: ['', Validators.required],
+      atk: ['', Validators.required],
+      def: ['', Validators.required],
+      speAtk: ['', Validators.required],
+      speDef: ['', Validators.required],
+      speed: ['', Validators.required],
+      //img:['']
+    });
   }
 
+  ngOnInit() {}
 
-  constructor(private modalCtrl: ModalController,private formBuilder:FormBuilder,private toastController: ToastController) {
-    this.form = this.formBuilder.group({
-      name:['',Validators.required],
-      hp:['' ,Validators.required,numericValidator.numericProto()],
-      atk:['',Validators.required,numericValidator.numericProto()],
-      def:['',Validators.required,numericValidator.numericProto()],
-      speAtk:['',Validators.required,numericValidator.numericProto()],
-      speDef:['',Validators.required,numericValidator.numericProto()],
-      speed:['',Validators.required,numericValidator.numericProto()],
-      //img:['']
-    })
+  @Input() set pkm(_pkm: Pokemon | null) {
+    if (_pkm) {
+      this.pokemon = _pkm;
+      this.form.patchValue({
+        name: _pkm.attributes.name,
+        hp: _pkm.attributes.hp,
+        atk: _pkm.attributes.atk,
+        def: _pkm.attributes.def,
+        speAtk: _pkm.attributes.speAtk,
+        speDef: _pkm.attributes.speDef,
+        speed: _pkm.attributes.speed,
+        img: _pkm.attributes.image
+      });
+    }
   }
 
   cancel() {
     return this.modalCtrl.dismiss(null, 'cancel');
   }
 
-   confirm() {
+  confirm() {
     if (this.form.valid) {
       const formData = this.form.value;
       const newPokemon: Pokemon = {
-        id: this.pokemon ? this.pokemon.id : -1, 
+        id: this.pokemon ? this.pokemon.id : -1,
         attributes: {
           name: formData.name,
           hp: formData.hp,
@@ -59,14 +66,12 @@ export class PokedexFormComponent implements OnInit {
           speAtk: formData.speAtk,
           speDef: formData.speDef,
           speed: formData.speed,
-          image: formData.img
-        }
+         // image: formData.img,
+        },
       };
-      this.modalCtrl.dismiss(newPokemon, 'confirm');
+      this.modalCtrl.dismiss(newPokemon, this.mode);
     } else {
-        console.log ('El formulario no es válido.')
+      console.log('El formulario no es válido.');
     }
- 
   }
-  ngOnInit() {}
 }

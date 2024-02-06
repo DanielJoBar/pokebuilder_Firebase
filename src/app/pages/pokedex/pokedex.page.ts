@@ -29,14 +29,18 @@ export class PokedexPage implements OnInit {
     const modal = await this.modalCtrl.create({
       component: PokedexFormComponent,
       componentProps: {
-        pokemon: pokemon,
+        mode: pokemon ? 'Edit' : 'New', 
+        pkm: pokemon,
       },
     });
     modal.present();
 
     const { data, role } = await modal.onWillDismiss();
-    if (role === 'confirm') {
-      var datos = data;
+    if (role === 'New') {
+      this.pokemonSvc.createOne(data);
+    }
+    else if(role === 'Edit'){
+      this.pokemonSvc.updateOne(data);
     }
   }
   onPokemonClicked(pokemon: Pokemon) {
