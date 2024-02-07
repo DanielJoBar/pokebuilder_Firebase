@@ -3,7 +3,7 @@ import { User } from './user';
 
 export interface PokemonApi {
   data: Pokemon[]
-  meta: {
+  meta?: {
     pagination: {
       page: number;
       pageSize: number,

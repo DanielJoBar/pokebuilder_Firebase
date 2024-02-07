@@ -5,6 +5,8 @@ import { OverlayEventDetail } from '@ionic/core/components';
 import { PokedexFormComponent } from 'src/app/shared/components/pokedex-form/pokedex-form.component';
 import { Pokemon } from 'src/app/core/interfaces/pokemon';
 import { PokemonApi } from 'src/app/core/interfaces/pokemon-api';
+import { UserApi } from 'src/app/core/interfaces/user-api';
+import { AuthService } from 'src/app/core/servicies/auth.service';
 
 @Component({
   selector: 'app-pokedex',
@@ -13,15 +15,20 @@ import { PokemonApi } from 'src/app/core/interfaces/pokemon-api';
 })
 export class PokedexPage implements OnInit {
   pokemons: Pokemon[] = [];
-
+  idUser: number | null = null;
   constructor(
     protected pokemonSvc: PokemonService,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private authSvc: AuthService
   ) {}
 
   ngOnInit() {
-    this.pokemonSvc.getTodo().subscribe((result: PokemonApi) => {
-      this.pokemons = result.data;
+    this.authSvc.me().subscribe((result: UserApi) => {
+      var userId = result.id;
+      this.idUser = userId;
+      this.pokemonSvc.getTodo(userId).subscribe((result: PokemonApi) => {
+        this.pokemons = result.data;
+      });
     });
   }
 
@@ -29,7 +36,7 @@ export class PokedexPage implements OnInit {
     const modal = await this.modalCtrl.create({
       component: PokedexFormComponent,
       componentProps: {
-        mode: pokemon ? 'Edit' : 'New', 
+        mode: pokemon ? 'Edit' : 'New',
         pkm: pokemon,
       },
     });
@@ -37,10 +44,17 @@ export class PokedexPage implements OnInit {
 
     const { data, role } = await modal.onWillDismiss();
     if (role === 'New') {
-      this.pokemonSvc.createOne(data);
-    }
-    else if(role === 'Edit'){
-      this.pokemonSvc.updateOne(data);
+      this.pokemonSvc
+        .createOne(data, this.idUser!)
+        .subscribe((result: PokemonApi) => {
+          this.pokemons = result.data;
+        });
+      this.pokemonSvc.getTodo(this.idUser!).subscribe();
+    } else if (role === 'Edit') {
+      this.pokemonSvc.updateOne(data).subscribe((result: PokemonApi) => {
+        this.pokemons = result.data;
+      });
+      this.pokemonSvc.getTodo(this.idUser!).subscribe();
     }
   }
   onPokemonClicked(pokemon: Pokemon) {

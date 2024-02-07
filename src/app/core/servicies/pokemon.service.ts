@@ -1,23 +1,24 @@
 import { Injectable } from '@angular/core';
-import { HttpClientProvider } from './http-client.provider';
-import { BehaviorSubject, Observable, map, tap } from 'rxjs';
+import { BehaviorSubject, Observable, map } from 'rxjs';
 import { environment } from 'src/environments/environment.prod';
 import { Pokemon } from '../interfaces/pokemon';
 import { PokemonApi } from '../interfaces/pokemon-api';
-import { HttpClient } from '@angular/common/http';
 import { ApiService } from './api.service';
-import { StrapiLoginPayload } from '../interfaces/strapi';
+import { AuthStrapiService } from './auth-strapi.service';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PokemonService {
-  constructor(private http: HttpClient, private apiSvc: ApiService) {}
+
+  constructor(private authSvc: AuthService, private apiSvc: ApiService) {
+  }
   private _pokemon: BehaviorSubject<Pokemon[]> = new BehaviorSubject<Pokemon[]>(
     []
   );
   pokemon$ = this._pokemon.asObservable();
-
+  
   /**
    public query(q: string): Observable<PokemonApi> {
      return this.apiSc.get(environment.API_URL + '/pokemons?q='+q);
@@ -25,47 +26,56 @@ export class PokemonService {
    * 
    */
 
-   getTodo(): Observable<PokemonApi> {
-    return this.apiSvc.get('/pokemons').pipe(
+  getTodo(userId:number): Observable<PokemonApi> {
+    const apiUrl = "/pokemons?populate=user&filters[user]="+userId;
+    return this.apiSvc.get(apiUrl).pipe(
       map((info: PokemonApi) => {
         const dataPokemon = info.data;
-        const transformedPokemons: Pokemon[] = dataPokemon.map((algo: Pokemon) => {
-          return {
-            id: algo.id,
-            attributes: {
-              name: algo.attributes.name,
-              hp: algo.attributes.hp,
-              atk: algo.attributes.atk,
-              def: algo.attributes.def,
-              speAtk: algo.attributes.speAtk,
-              speDef: algo.attributes.speDef,
-              speed: algo.attributes.speed,
-              bst: algo.attributes.bst,
-            }
-          };
-        });
-        
+        const transformedPokemons: Pokemon[] = dataPokemon.map(
+          (algo: Pokemon) => {
+            return {
+              id: algo.id,
+              attributes: {
+                name: algo.attributes.name,
+                hp: algo.attributes.hp,
+                atk: algo.attributes.atk,
+                def: algo.attributes.def,
+                speAtk: algo.attributes.speAtk,
+                speDef: algo.attributes.speDef,
+                speed: algo.attributes.speed,
+                bst: algo.attributes.bst,
+              },
+            };
+          }
+        );
+
         // Actualizamos data en info
         const transformedInfo: PokemonApi = {
           data: transformedPokemons,
-          meta: info.meta
+          meta: info.meta,
         };
-        
+
         // Devolvemos la información transformada
         return transformedInfo;
       })
     );
   }
-  public createOne(pokemon:Pokemon): Observable<Pokemon>{
-    var _newPokemon = pokemon;
-    return new Observable<Pokemon>((obs) => {
-      this.apiSvc
-        .post(environment.API_URL + `/pokemons/`,_newPokemon)
-        .subscribe((observer) => {
-          this.getTodo().subscribe((_) => {
-            obs.next(_newPokemon);
-          });
-        });
+  public createOne(pokemon: Pokemon,userId:number): Observable<PokemonApi> {
+    var _newPokemon = {
+      data: {
+        name: pokemon.attributes.name,
+        hp: pokemon.attributes.hp,
+        atk: pokemon.attributes.atk,
+        def: pokemon.attributes.def,
+        speAtk: pokemon.attributes.speAtk,
+        speDef: pokemon.attributes.speDef,
+        speed: pokemon.attributes.speed,
+        bst: pokemon.attributes.bst,
+        users:userId
+      },
+    };
+    return new Observable<PokemonApi>((obs) => {
+      this.apiSvc.post('/pokemons/', _newPokemon).subscribe();
     });
   }
   public deleteOne(pokemon: Pokemon): Observable<Pokemon> {
@@ -73,9 +83,7 @@ export class PokemonService {
       this.apiSvc
         .delete(environment.API_URL + `/pokemons/${pokemon.id}`)
         .subscribe((observer) => {
-          this.getTodo().subscribe((_) => {
-            obs.next(pokemon);
-          });
+          this.getTodo(1).subscribe();
         });
     });
   }
@@ -118,15 +126,13 @@ export class PokemonService {
       })
     );
   }*/
-  
-  public updateOne(pokemon: Pokemon): Observable<Pokemon> {
-    return new Observable<Pokemon>((obs) => {
+
+  public updateOne(pokemon: Pokemon): Observable<PokemonApi> {
+    return new Observable<PokemonApi>((obs) => {
       this.apiSvc
         .patch(environment.API_URL + `/pokemons/${pokemon.id}`, pokemon)
         .subscribe((observer) => {
-          this.getTodo().subscribe((_) => {
-            obs.next(pokemon);
-          });
+          this.getTodo(1).subscribe();
         });
     });
   }

@@ -21,12 +21,12 @@ export class PokedexFormComponent implements OnInit {
   ) {
     this.form = this.formBuilder.group({
       name: ['', Validators.required],
-      hp: ['', Validators.required],
-      atk: ['', Validators.required],
-      def: ['', Validators.required],
-      speAtk: ['', Validators.required],
-      speDef: ['', Validators.required],
-      speed: ['', Validators.required],
+      hp: [, Validators.required],
+      atk: [, Validators.required],
+      def: [, Validators.required],
+      speAtk: [, Validators.required],
+      speDef: [, Validators.required],
+      speed: [, Validators.required],
       //img:['']
     });
   }
@@ -60,12 +60,13 @@ export class PokedexFormComponent implements OnInit {
         id: this.pokemon ? this.pokemon.id : -1,
         attributes: {
           name: formData.name,
-          hp: formData.hp,
-          atk: formData.atk,
-          def: formData.def,
-          speAtk: formData.speAtk,
-          speDef: formData.speDef,
-          speed: formData.speed,
+          hp: Number(formData.hp),
+          atk: Number(formData.atk),
+          def: Number(formData.def),
+          speAtk: Number(formData.speAtk),
+          speDef: Number(formData.speDef),
+          speed: Number(formData.speed),
+          bst:Number(formData.hp)+Number(formData.atk)+Number(formData.def)+Number(formData.speAtk)+Number(formData.speDef)+Number(formData.speed)
          // image: formData.img,
         },
       };
