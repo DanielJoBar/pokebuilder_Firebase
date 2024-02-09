@@ -16,7 +16,7 @@ import { AuthService } from 'src/app/core/servicies/auth.service';
 export class PokedexPage implements OnInit {
   pokemons: Pokemon[] = [];
   idUser: number | null = null;
-  deletionMode:boolean=false;
+  deletionMode: boolean = false;
   constructor(
     protected pokemonSvc: PokemonService,
     private modalCtrl: ModalController,
@@ -45,33 +45,39 @@ export class PokedexPage implements OnInit {
 
     const { data, role } = await modal.onWillDismiss();
     if (role === 'New') {
-      this.pokemonSvc
-        .createOne(data, this.idUser!)
-        .subscribe((result: PokemonApi) => {
-          this.pokemons = result.data;
-        });
+      this.pokemonSvc.createOne(data, this.idUser!).subscribe((_) => {
+        this.pokemonSvc
+          .getTodo(this.idUser!)
+          .subscribe((result: PokemonApi) => {
+            this.pokemons = result.data;
+          });
+      });
       this.pokemonSvc.getTodo(this.idUser!).subscribe();
     } else if (role === 'Edit') {
-      this.pokemonSvc.updateOne(data,this.idUser!).subscribe((result: PokemonApi) => {
-        this.pokemons = result.data;
+      this.pokemonSvc.updateOne(data, this.idUser!).subscribe((_) => {
+        this.pokemonSvc
+          .getTodo(this.idUser!)
+          .subscribe((result: PokemonApi) => {
+            this.pokemons = result.data;
+          });
       });
-      this.pokemonSvc.getTodo(this.idUser!).subscribe();
     }
   }
-  onPokemonClicked(pokemon: Pokemon,deletionMode:Boolean = false) {
-    if (deletionMode!)
-    {
+  onPokemonClicked(pokemon: Pokemon) {
+    if (this.deletionMode!) {
       this.onPlusClicked(pokemon);
-    }
-    else{
-      this.pokemonSvc.deleteOne(pokemon,this.idUser!).subscribe((result: PokemonApi) => {
-        this.pokemons = result.data;
+    } else {
+      this.pokemonSvc.deleteOne(pokemon, this.idUser!).subscribe((_) => {
+        this.pokemonSvc
+          .getTodo(this.idUser!)
+          .subscribe((result: PokemonApi) => {
+            this.pokemons = result.data;
+          });
       });
-      this.pokemonSvc.getTodo(this.idUser!).subscribe();
-      this.deletionMode=false;
+      this.deletionMode = false;
     }
   }
-  onMinusClicked(){
-    this.deletionMode= true;
+  onMinusClicked() {
+    this.deletionMode = true;
   }
 }
