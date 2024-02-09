@@ -16,6 +16,7 @@ import { AuthService } from 'src/app/core/servicies/auth.service';
 export class PokedexPage implements OnInit {
   pokemons: Pokemon[] = [];
   idUser: number | null = null;
+  deletionMode:boolean=false;
   constructor(
     protected pokemonSvc: PokemonService,
     private modalCtrl: ModalController,
@@ -32,7 +33,7 @@ export class PokedexPage implements OnInit {
     });
   }
 
-  async openModal(pokemon?: Pokemon) {
+  async onPlusClicked(pokemon?: Pokemon) {
     const modal = await this.modalCtrl.create({
       component: PokedexFormComponent,
       componentProps: {
@@ -51,13 +52,26 @@ export class PokedexPage implements OnInit {
         });
       this.pokemonSvc.getTodo(this.idUser!).subscribe();
     } else if (role === 'Edit') {
-      this.pokemonSvc.updateOne(data).subscribe((result: PokemonApi) => {
+      this.pokemonSvc.updateOne(data,this.idUser!).subscribe((result: PokemonApi) => {
         this.pokemons = result.data;
       });
       this.pokemonSvc.getTodo(this.idUser!).subscribe();
     }
   }
-  onPokemonClicked(pokemon: Pokemon) {
-    this.openModal(pokemon);
+  onPokemonClicked(pokemon: Pokemon,deletionMode:Boolean = false) {
+    if (deletionMode!)
+    {
+      this.onPlusClicked(pokemon);
+    }
+    else{
+      this.pokemonSvc.deleteOne(pokemon,this.idUser!).subscribe((result: PokemonApi) => {
+        this.pokemons = result.data;
+      });
+      this.pokemonSvc.getTodo(this.idUser!).subscribe();
+      this.deletionMode=false;
+    }
+  }
+  onMinusClicked(){
+    this.deletionMode= true;
   }
 }

@@ -1,28 +1,20 @@
-<ion-content [fullscreen]="true" >
+<ion-content [fullscreen]="true">
   <div class="CrudButtons">
-    <ion-button class="button" (click)="openModal()" expand="full"
-      >+</ion-button>
-    <ion-button class="button" expand="full">-</ion-button>
+    <ion-button class="button" (click)="onPlusClicked()" expand="full"
+      >+</ion-button
+    >
+    <ion-button class="button" expand="full" (click)="onMinusClicked()"
+      >-</ion-button
+    >
   </div>
   <ion-grid>
-    <ion-col size="6"  >
-      <p>Texto columna 1</p>
+    <ion-col size="12">
       <app-pokemon-item
         *ngFor="let pokemon of pokemons"
-        [pokemon] = "pokemon"
+        [pokemon]="pokemon"
         (onPokemonClicked)="onPokemonClicked(pokemon)"
-        >
+      >
       </app-pokemon-item>
     </ion-col>
-    <ion-col size="6" >
-      <p>Texto columna 2</p>
-      <app-pokemon-item
-        *ngFor="let pokemon of pokemons"
-        [pokemon] = "pokemon"
-        (onPokemonClicked)="onPokemonClicked(pokemon)"
-        >
-      </app-pokemon-item>
-    </ion-col>
-</ion-grid>
- 
+  </ion-grid>
 </ion-content>
