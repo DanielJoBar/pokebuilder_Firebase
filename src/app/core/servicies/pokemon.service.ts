@@ -124,20 +124,23 @@ export class PokemonService {
   }
   public getOne(pokemonId: number): Observable<Pokemon> {
     return this.apiSvc.get(`/pokemons/${pokemonId}`).pipe(
-      map((pokemon: Pokemon) => {
-        return {
-          id: pokemon.id,
+      map((pokemon: any) => {
+        console.log('El pokemon es: ' + pokemon);
+        var pokemonR: Pokemon = {
+          id: pokemon.data.id,
           attributes: {
-            name: pokemon.attributes.name,
-            hp: pokemon.attributes.hp,
-            atk: pokemon.attributes.atk,
-            def: pokemon.attributes.def,
-            speAtk: pokemon.attributes.speAtk,
-            speDef: pokemon.attributes.speDef,
-            speed: pokemon.attributes.speed,
-            bst: pokemon.attributes.bst,
+            name: pokemon.data.attributes.name,
+            hp: pokemon.data.attributes.hp,
+            atk: pokemon.data.attributes.atk,
+            def: pokemon.data.attributes.def,
+            speAtk: pokemon.data.attributes.speAtk,
+            speDef: pokemon.data.attributes.speDef,
+            speed: pokemon.data.attributes.speed,
+            bst: pokemon.data.attributes.bst,
           },
         };
+        console.log('El pokemon es: ' + pokemon);
+        return pokemonR;
       })
     );
   }

@@ -1,4 +1,18 @@
-  <ion-content [fullscreen]="true" class="ion-padding">
+<ion-content [fullscreen]="true" class="ion-padding">
   <div id="container">
+    <ion-card>
+      <img
+        alt="Silhouette of mountains"
+        src="https://ionicframework.com/docs/img/demos/card-media.png"
+      />
+      <ion-card-header>
+        <ion-card-title>{{pokemon!.attributes.name}}</ion-card-title>
+        <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content> {{pokemon!.attributes.name}} </ion-card-content>
+      <ion-button fill="clear" (click)="onRandomClicked()">
+        Click to randomize
+      </ion-button>
+    </ion-card>
   </div>
 </ion-content>

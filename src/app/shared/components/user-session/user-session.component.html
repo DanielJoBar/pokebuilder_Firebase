@@ -1,17 +1,21 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-menu-button color="primary"></ion-menu-button>
+      <ion-menu-button color="danger"></ion-menu-button>
     </ion-buttons>
-    <div slot="end">
+    <div slot="end" aria-hidden="true">
       <ion-item (click)="ShowLogOff()" *ngIf="logged">
-        <ion-avatar aria-hidden="true" slot="start">
-          <img
-            alt=""
-            src="https://ionicframework.com/docs/img/demos/avatar.svg"
-          />
-        </ion-avatar>
-        <ion-label id="click-trigger">{{ username | primeraLetraMayuscula }}</ion-label>
+        <ion-label>
+          <ion-button id="click-trigger" fill="clear">
+            {{ username }}
+            <ion-avatar aria-hidden="true" slot="start">
+              <img
+                alt=""
+                src="https://ionicframework.com/docs/img/demos/avatar.svg"
+              />
+            </ion-avatar>
+          </ion-button>
+        </ion-label>
         <ion-popover trigger="click-trigger" trigger-action="click">
           <ion-content class="ion-padding" (click)="OnLogOff()"
             >Cerrar sesión
