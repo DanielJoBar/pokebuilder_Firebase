@@ -4,7 +4,7 @@
     <ion-button class="button" expand="full">-</ion-button>
   </div>
   <app-pokemon-team
-  *ngFor="let team of (teamScv.pokeTeam$ | async)"
+  *ngFor="let team of pokemonsList"
   [team]="team"
   >
   </app-pokemon-team>

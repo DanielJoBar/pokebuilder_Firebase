@@ -14,8 +14,8 @@ import { PokemonTeamComponent } from 'src/app/shared/components/pokemon-team/pok
     CommonModule,
     FormsModule,
     IonicModule,
-    TeamBuilderPageRoutingModule
-  ],
-  declarations: [TeamBuilderPage,PokemonTeamComponent]
+    TeamBuilderPageRoutingModule,
+    ],
+  declarations: [TeamBuilderPage, PokemonTeamComponent],
 })
 export class TeamBuilderPageModule {}
