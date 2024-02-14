@@ -29,8 +29,10 @@ export class TeamBuilderPage implements OnInit {
       var userId = result.id;
       this.idUser = userId;
       this.teamScv.getAllFromUser(userId).subscribe((team: TeamData) => {
+        if(team){
         this.pokemons = team;
-        this.pokemonsList.push(this.pokemons)
+        this.pokemonsList!.push(this.pokemons)
+        }
       });
     });
   }

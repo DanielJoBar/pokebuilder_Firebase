@@ -1,11 +1,11 @@
 <ion-content [fullscreen]="true">
   <div class="CrudButtons">
     <ion-button class="button" (click)="onPlusClicked()" expand="full"
-      >+</ion-button
-    >
-    <ion-button class="button" expand="full" (click)="onMinusClicked()"
-      >-</ion-button
-    >
+      ><ion-icon name="add-outline"></ion-icon>
+    </ion-button>
+    <ion-button class="button" expand="full" (click)="onMinusClicked()">
+      <ion-icon name="remove-outline"></ion-icon>
+    </ion-button>
   </div>
   <ion-grid>
     <ion-col size="12">

@@ -8,7 +8,7 @@ import { PokedexFormComponent } from './components/pokedex-form/pokedex-form.com
 import { PokemonTeamFormComponent } from './components/pokemon-team-form/pokemon-team-form.component';
 
 @NgModule({
-  declarations: [UserSessionComponent,PrimeraLetraMayusculaPipe,PokedexFormComponent,PokemonTeamFormComponent],
+  declarations: [UserSessionComponent,PrimeraLetraMayusculaPipe,PokedexFormComponent],
   imports: [
     CommonModule,
     IonicModule,
