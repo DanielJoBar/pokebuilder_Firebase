@@ -6,7 +6,7 @@
     <div slot="end" aria-hidden="true">
       <ion-item (click)="ShowLogOff()" *ngIf="logged">
         <ion-label>
-          <ion-button id="click-trigger" fill="clear">
+          <ion-button fill="clear" id="user-trigger">
             {{ username }}
             <ion-avatar aria-hidden="true" slot="start">
               <img
@@ -16,12 +16,28 @@
             </ion-avatar>
           </ion-button>
         </ion-label>
-        <ion-popover trigger="click-trigger" trigger-action="click">
-          <ion-content class="ion-padding" (click)="OnLogOff()"
-            >Cerrar sesión
-          </ion-content>
-        </ion-popover>
       </ion-item>
     </div>
   </ion-toolbar>
+  <ion-popover
+    aria-modal="true"
+    trigger="user-trigger"
+    triggeraction="click"
+    size="cover"
+    side="bottom"
+    alignment="center"
+    [backdropDismiss]="true"
+    [dismissOnSelect]="true"
+  >
+  <ng-template>
+    <ion-content>
+      <ion-list>
+        <ion-item button="true" detail="false">Cambiar idioma</ion-item>
+        <ion-item button="true" detail="false" (click)="OnLogOff()"
+        >Cerrar Sesión</ion-item
+        >
+      </ion-list>
+    </ion-content>
+  </ng-template>
+  </ion-popover>
 </ion-header>
