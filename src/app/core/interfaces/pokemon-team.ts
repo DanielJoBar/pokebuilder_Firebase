@@ -1,5 +1,6 @@
 import { Pokemon } from './pokemon';
 import { PokemonApi } from './pokemon-api';
+import { UserApi } from './user-api';
 
 export interface PokemonTeam {
   data: TeamData[];
@@ -18,4 +19,5 @@ export interface Attributes {
   pokemon_4: PokemonApi;
   pokemon_5: PokemonApi;
   pokemon_6: PokemonApi;
+  user?:UserApi;
 }

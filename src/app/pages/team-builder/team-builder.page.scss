@@ -2,8 +2,19 @@ ion-content{
     --padding-top: 54px;
 }
 .CrudButtons{
-    columns: 2;
+    columns: 2;    position:relative;
 }
 .button{
+    padding: 2%;
     height: 45px;
+} 
+
+app-pokemon-team{
+    margin: 3%;
+    width: calc(50% - 30%);
+    justify-content: center !important; 
+    align-items: center !important; 
+}
+.Bloques{
+    columns: 2;
 }

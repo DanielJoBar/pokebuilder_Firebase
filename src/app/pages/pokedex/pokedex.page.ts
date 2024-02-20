@@ -64,17 +64,17 @@ export class PokedexPage implements OnInit {
     }
   }
   onPokemonClicked(pokemon: Pokemon) {
-    if (this.deletionMode!) {
+    if (!this.deletionMode) {
       this.onPlusClicked(pokemon);
     } else {
+      this.deletionMode = false;
       this.pokemonSvc.deleteOne(pokemon, this.idUser!).subscribe((_) => {
         this.pokemonSvc
           .getTodo(this.idUser!)
           .subscribe((result: PokemonApi) => {
             this.pokemons = result.data;
           });
-      });
-      this.deletionMode = false;
+      });  
     }
   }
   onMinusClicked() {

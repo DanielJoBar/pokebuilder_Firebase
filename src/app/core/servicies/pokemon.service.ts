@@ -81,7 +81,7 @@ export class PokemonService {
   ): Observable<Pokemon | null> {
     const apiUrl = `/pokemons/${pokemon.id}`;
     return new Observable<Pokemon | null>((obs) => {
-      if (pokemon.id < 5) {
+      if (pokemon.id > 5) {
         this.apiSvc.delete(apiUrl).subscribe((observer) => {
           this.getTodo(userId).subscribe();
           obs.next(observer);

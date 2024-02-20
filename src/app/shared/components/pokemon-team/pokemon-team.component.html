@@ -1,16 +1,16 @@
-<ion-card class="mainCard" lines="none">
+<ion-card class="mainCard" >
   <ion-card-content >
-    <ion-list class="mainList">
+    <ion-list class="mainList" lines="none">
       <ion-card class="secondaryCard">
         <ion-card-header>
           <ion-card-title>{{ team!.attributes!.title }}</ion-card-title>
-          <ion-card-subtitle></ion-card-subtitle>
         </ion-card-header>
         <ion-card-content>
-          <ion-list>
+          <ion-list class="secondaryList" lines="none">
             <app-team-comp
               *ngFor="let pokemon of pokemonList"
               [receptor]="pokemon"
+              (click)="onTeamCompClicked(pokemon)"
             >
             </app-team-comp>
           </ion-list>

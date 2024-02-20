@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Pokemon } from 'src/app/core/interfaces/pokemon';
 import { PokemonApi } from 'src/app/core/interfaces/pokemon-api';
 import { PokemonTeam, TeamData } from 'src/app/core/interfaces/pokemon-team';
 @Component({
@@ -7,7 +8,10 @@ import { PokemonTeam, TeamData } from 'src/app/core/interfaces/pokemon-team';
   styleUrls: ['./pokemon-team.component.scss'],
 })
 export class PokemonTeamComponent implements OnInit {
+  @Output() onTeamCompClick : EventEmitter<PokemonApi>= new EventEmitter<PokemonApi>;
+  @Output() teamIdEmiter : EventEmitter<number> = new EventEmitter<number>;
   @Input() team: TeamData={
+    id:-1,
     attributes:{
       title: "Team",
       pokemon_1: {
@@ -41,4 +45,10 @@ export class PokemonTeamComponent implements OnInit {
     this.pokemonList.push(this.team.attributes.pokemon_5);
     this.pokemonList.push(this.team.attributes.pokemon_6);
   }
+  onTeamCompClicked(event:PokemonApi){
+    var pokemonapi:PokemonApi = event;
+    this.onTeamCompClick.emit(event);
+    this.teamIdEmiter.emit(this.team.id);
+  }
+  
 }

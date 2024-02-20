@@ -3,22 +3,73 @@
     <ion-buttons slot="start">
       <ion-button color="medium" (click)="cancel()">Cancel</ion-button>
     </ion-buttons>
-    <ion-title>Create a new Pokemon</ion-title>
-    <ion-buttons slot="end">
-      <ion-button (click)="confirm()" [strong]="true">Confirm</ion-button>
+    <ion-title *ngIf="mode != 'View'">Create a new Pokemon</ion-title>
+    <ion-buttons slot="end" >
+      <ion-button (click)="confirm()" [strong]="true">{{ mode !== 'View' ? 'Confirm' : 'Remove from team' }}</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding">
   <form [formGroup]="form" (ngSubmit)="confirm()">
     <ion-item>
-      <ion-input class="texto" formControlName= "name" labelPlacement="stacked" label="name"  placeholder="Your pokemon name" type="text"></ion-input>
-      <ion-input formControlName= "hp" labelPlacement="stacked" label="hp"  placeholder="Your pokemon hp" type="number"></ion-input>
-      <ion-input formControlName= "atk" labelPlacement="stacked" label="atk"  placeholder="Your pokemon atk"  type="number"></ion-input>
-      <ion-input formControlName= "def" labelPlacement="stacked" label="def"  placeholder="Your pokemon def"  type="number"></ion-input>
-      <ion-input formControlName= "speAtk" labelPlacement="stacked" label="speAtk"  placeholder="Your pokemon speAtk" type="number"></ion-input>
-      <ion-input formControlName= "speDef" labelPlacement="stacked" label="speDef"  placeholder="Your pokemon speDef" type="number"></ion-input>
-      <ion-input formControlName= "speed" labelPlacement="stacked" label="speed"  placeholder="Your pokemon speed" type="number"></ion-input>
+      <ion-input
+        class="texto"
+        formControlName="name"
+        labelPlacement="stacked"
+        label="name"
+        placeholder="Nombre de tu pokemon"
+        type="text"
+        [readonly]="mode == 'View'"
+      ></ion-input>
+      <ion-input
+        formControlName="hp"
+        labelPlacement="stacked"
+        label="hp"
+        placeholder="Hp de tu pokemon"
+        type="number"
+        [readonly]="mode == 'View'"
+      ></ion-input>
+      <ion-input
+        formControlName="atk"
+        labelPlacement="stacked"
+        label="atk"
+        placeholder="Atk de tu pokemon"
+        type="number"
+        [readonly]="mode == 'View'"
+      ></ion-input>
+      <ion-input
+        formControlName="def"
+        labelPlacement="stacked"
+        label="def"
+        placeholder="Def de tu pokemon"
+        type="number"
+        [readonly]="mode == 'View'"
+      ></ion-input>
+      <ion-input
+        formControlName="speAtk"
+        labelPlacement="stacked"
+        label="speAtk"
+        placeholder="AtkEsp de tu pokemon"
+        type="number"
+        [readonly]="mode == 'View'"
+      ></ion-input>
+      <ion-input
+        formControlName="speDef"
+        labelPlacement="stacked"
+        label="speDef"
+        placeholder="DefEsp de tu pokemon"
+        type="number"
+        [readonly]="mode == 'View'"
+      ></ion-input>
+      <ion-input
+        formControlName="speed"
+        labelPlacement="stacked"
+        label="speed"
+        placeholder="Velocidad de tu pokemon"
+        type="number"
+        [readonly]="mode == 'View'"
+      ></ion-input>
     </ion-item>
+    
   </form>
 </ion-content>

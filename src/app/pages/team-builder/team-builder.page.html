@@ -1,11 +1,15 @@
 <ion-content>
   <div class="CrudButtons">
-    <ion-button class="button" expand="full" ><ion-icon name="add-outline"></ion-icon></ion-button>
-    <ion-button class="button" expand="full" ><ion-icon name="remove-outline"></ion-icon></ion-button>
+    <ion-button class="button" expand="full" (click)="onAddClicked()" ><ion-icon name="add-outline"></ion-icon></ion-button>
+    <ion-button id="minus" class="button" expand="full" (click)="onDeleteClicked()"><ion-icon  name="remove-outline"></ion-icon></ion-button>
   </div>
-  <app-pokemon-team
-  *ngFor="let team of pokemonsList"
-  [team]="team"
-  >
-  </app-pokemon-team>
+  <div class="Bloques">
+    <app-pokemon-team
+      *ngFor="let team of pokemonsList"
+      [team]="team"
+      (onTeamCompClick)="onEditOrAddComp($event)"
+      (teamIdEmiter)="getIdTeam($event)"
+    >
+    </app-pokemon-team>
+  </div>
 </ion-content>

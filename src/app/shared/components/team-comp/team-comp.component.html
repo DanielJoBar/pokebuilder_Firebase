@@ -1,8 +1,6 @@
-<ion-item>
-  <div class="cuadrado">
+<ion-item class="cuadrado">
     <ion-label *ngIf="!isPokemon()"><ion-icon name="add-outline"/></ion-label>
     <ion-label *ngIf="isPokemon()">
       {{ pokemon!.data[0].attributes.name }}
     </ion-label>
-  </div>
 </ion-item>

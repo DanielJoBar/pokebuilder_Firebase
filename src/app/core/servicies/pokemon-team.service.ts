@@ -6,6 +6,7 @@ import { BehaviorSubject, Observable, map, tap } from 'rxjs';
 import { Pokemon } from '../interfaces/pokemon';
 import { ApiService } from './api.service';
 import { PokemonApi } from '../interfaces/pokemon-api';
+import { UserApi } from '../interfaces/user-api';
 
 @Injectable({
   providedIn: 'root',
@@ -17,25 +18,103 @@ export class PokemonTeamService {
   pokeTeam$ = this._pokeTeam.asObservable();
 
   constructor(private apiSvc: ApiService) {}
-  addTeam(
-    newTitle: string,
-    team: Pokemon[],
-    userId: number
-  ): Observable<TeamData> {
-    var url = `/pokemon-teams?populate=users,pokemon_1,pokemon_2,pokemon_3,pokemon_4,Pokemon_5,Pokemon_6&filters[users]=${userId}`;
-    var pkmArray: PokemonApi[] = this.toArrayOfArrays(team);
-    const newTeam: TeamData = {
-      attributes: {
-        title: newTitle,
-        pokemon_1: pkmArray[0],
-        pokemon_2: pkmArray[1],
-        pokemon_3: pkmArray[2],
-        pokemon_4: pkmArray[3],
-        pokemon_5: pkmArray[4],
-        pokemon_6: pkmArray[5],
+  addTeam(newTeam: TeamData, currentUser: UserApi): Observable<TeamData> {
+    var url = `/pokemon-teams?populate=user,pokemon_1,pokemon_2,pokemon_3,pokemon_4,Pokemon_5,Pokemon_6`;
+    const mappedTeam = {
+      data: {
+        title: newTeam.attributes.title,
+        pokemon_1: newTeam.attributes.pokemon_1.data.length > 0 ? {
+          
+          id: newTeam.attributes.pokemon_1.data[0].id,
+          name: newTeam.attributes.pokemon_1.data[0].attributes.name,
+          hp: newTeam.attributes.pokemon_1.data[0].attributes.hp,
+          atk: newTeam.attributes.pokemon_1.data[0].attributes.atk,
+          def: newTeam.attributes.pokemon_1.data[0].attributes.def,
+          speAtk: newTeam.attributes.pokemon_1.data[0].attributes.speAtk,
+          speDef: newTeam.attributes.pokemon_1.data[0].attributes.speDef,
+          speed: newTeam.attributes.pokemon_1.data[0].attributes.speed,
+          bst: newTeam.attributes.pokemon_1.data[0].attributes.bst,
+
+        } : {data:[]},
+
+        pokemon_2: newTeam.attributes.pokemon_2.data.length > 0 ? {
+
+          id: newTeam.attributes.pokemon_2.data[0].id,
+          name: newTeam.attributes.pokemon_2.data[0].attributes.name,
+          hp: newTeam.attributes.pokemon_2.data[0].attributes.hp,
+          atk: newTeam.attributes.pokemon_2.data[0].attributes.atk,
+          def: newTeam.attributes.pokemon_2.data[0].attributes.def,
+          speAtk: newTeam.attributes.pokemon_2.data[0].attributes.speAtk,
+          speDef: newTeam.attributes.pokemon_2.data[0].attributes.speDef,
+          speed: newTeam.attributes.pokemon_2.data[0].attributes.speed,
+          bst: newTeam.attributes.pokemon_2.data[0].attributes.bst,
+        
+        } : {data:[]},
+
+        pokemon_3: newTeam.attributes.pokemon_3.data.length > 0 ? {
+
+          id: newTeam.attributes.pokemon_3.data[0].id,
+          name: newTeam.attributes.pokemon_3.data[0].attributes.name,
+          hp: newTeam.attributes.pokemon_3.data[0].attributes.hp,
+          atk: newTeam.attributes.pokemon_3.data[0].attributes.atk,
+          def: newTeam.attributes.pokemon_3.data[0].attributes.def,
+          speAtk: newTeam.attributes.pokemon_3.data[0].attributes.speAtk,
+          speDef: newTeam.attributes.pokemon_3.data[0].attributes.speDef,
+          speed: newTeam.attributes.pokemon_3.data[0].attributes.speed,
+          bst: newTeam.attributes.pokemon_3.data[0].attributes.bst,
+
+        } : {data:[]},
+
+        pokemon_4: newTeam.attributes.pokemon_4.data.length > 0 ? {
+
+          id: newTeam.attributes.pokemon_4.data[0].id,
+          name: newTeam.attributes.pokemon_4.data[0].attributes.name,
+          hp: newTeam.attributes.pokemon_4.data[0].attributes.hp,
+          atk: newTeam.attributes.pokemon_4.data[0].attributes.atk,
+          def: newTeam.attributes.pokemon_4.data[0].attributes.def,
+          speAtk: newTeam.attributes.pokemon_4.data[0].attributes.speAtk,
+          speDef: newTeam.attributes.pokemon_4.data[0].attributes.speDef,
+          speed: newTeam.attributes.pokemon_4.data[0].attributes.speed,
+          bst: newTeam.attributes.pokemon_4.data[0].attributes.bst,
+
+        } : {data:[]},
+
+        pokemon_5: newTeam.attributes.pokemon_5.data.length > 0 ? {
+
+          id: newTeam.attributes.pokemon_5.data[0].id,
+          name: newTeam.attributes.pokemon_5.data[0].attributes.name,
+          hp: newTeam.attributes.pokemon_5.data[0].attributes.hp,
+          atk: newTeam.attributes.pokemon_5.data[0].attributes.atk,
+          def: newTeam.attributes.pokemon_5.data[0].attributes.def,
+          speAtk: newTeam.attributes.pokemon_5.data[0].attributes.speAtk,
+          speDef: newTeam.attributes.pokemon_5.data[0].attributes.speDef,
+          speed: newTeam.attributes.pokemon_5.data[0].attributes.speed,
+          bst: newTeam.attributes.pokemon_5.data[0].attributes.bst,
+
+        } : {data:[]},
+
+        pokemon_6: newTeam.attributes.pokemon_6.data.length > 0 ? {
+
+          id: newTeam.attributes.pokemon_6.data[0].id,
+          name: newTeam.attributes.pokemon_6.data[0].attributes.name,
+          hp: newTeam.attributes.pokemon_6.data[0].attributes.hp,
+          atk: newTeam.attributes.pokemon_6.data[0].attributes.atk,
+          def: newTeam.attributes.pokemon_6.data[0].attributes.def,
+          speAtk: newTeam.attributes.pokemon_6.data[0].attributes.speAtk,
+          speDef: newTeam.attributes.pokemon_6.data[0].attributes.speDef,
+          speed: newTeam.attributes.pokemon_6.data[0].attributes.speed,
+          bst: newTeam.attributes.pokemon_6.data[0].attributes.bst,
+
+        } : {data:[]},
+        user: {
+          id: currentUser.id,
+          username: currentUser.username,
+          email: currentUser.email,
+        },
       },
     };
-    return this.apiSvc.post(url, newTeam);
+    var data = this.apiSvc.post(url, mappedTeam);
+    return data;
   }
   public getAll(): Observable<TeamData> {
     var url = `/pokemon-teams?populate=pokemon_1,pokemon_2,pokemon_3,pokemon_4,Pokemon_5,Pokemon_6`;
@@ -63,10 +142,10 @@ export class PokemonTeamService {
       })
     );
   }
-  public getAllFromUser(userId: number): Observable<TeamData> {
+  public getAllFromUser(userId: number): Observable<TeamData[]> {
     return this.apiSvc
       .get(
-        `/pokemon-teams?populate=pokemon_1,pokemon_2,pokemon_3,pokemon_4,pokemon_5,pokemon_6&filters[users]=${userId}`
+        `/pokemon-teams?populate=pokemon_1,pokemon_2,pokemon_3,pokemon_4,pokemon_5,pokemon_6&filters[user]=${userId}`
       )
       .pipe(
         map((pokemonTeam: PokemonTeam) => {
@@ -85,9 +164,9 @@ export class PokemonTeamService {
                 pokemon_6: team.attributes.pokemon_6,
               },
             };
-            return innerData;
+            return data;
           });
-          return innerData!;
+          return data!;
         })
       );
   }
@@ -118,25 +197,43 @@ export class PokemonTeamService {
         });
     });
   }
-  public updateOne(pokemon: Pokemon): Observable<Pokemon> {
-    return new Observable<Pokemon>((obs) => {
-      this.apiSvc
-        .patch(environment.API_URL + `/pokemons/${pokemon.id}`, pokemon)
-        .subscribe((observer) => {
-          this.getAll().subscribe((_) => {
-            obs.next(pokemon);
-          });
-        });
-    });
-  }
-  private toArrayOfArrays(list: Pokemon[]): PokemonApi[] {
-    const result: PokemonApi[] = [];
-    list.forEach((pkm) => {
-      const pokemonApi: PokemonApi = {
-        data: [pkm],
-      };
-      result.push(pokemonApi);
-    });
-    return result;
+  public updateOne(
+    pokemonTeam: TeamData,
+    teamId: number,
+    user: UserApi
+  ): Observable<TeamData> {
+    const updatedTeam: any = {
+      data: {
+        id: pokemonTeam.id,
+        attributes: {
+          title: pokemonTeam.attributes.title,
+          pokemon_1: pokemonTeam.attributes.pokemon_1,
+          pokemon_2: pokemonTeam.attributes.pokemon_2,
+          pokemon_3: pokemonTeam.attributes.pokemon_3,
+          pokemon_4: pokemonTeam.attributes.pokemon_4,
+          pokemon_5: pokemonTeam.attributes.pokemon_5,
+          pokemon_6: pokemonTeam.attributes.pokemon_6,
+          user: {
+            data: {
+              id: user.id,
+              attributes: {
+                username: user.username,
+                email: user.email,
+              },
+            },
+          },
+        },
+      },
+    };
+
+    var url = `/pokemon-teams/${teamId}?populate=pokemon_1,pokemon_2,pokemon_3,pokemon_4,Pokemon_5,Pokemon_6,user`;
+    var queryResult;
+    return this.apiSvc.put(url, updatedTeam).pipe(
+      map((result: any) => {
+        queryResult = result;
+        console.log('Resultado query: ' + queryResult);
+        return queryResult;
+      })
+    );
   }
 }

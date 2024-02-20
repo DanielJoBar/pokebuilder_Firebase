@@ -10,7 +10,7 @@ import { numericValidator } from 'src/app/core/validators/numeric';
   styleUrls: ['./pokedex-form.component.scss'],
 })
 export class PokedexFormComponent implements OnInit {
-  @Input() mode: 'New' | 'Edit' = 'New';
+  @Input() mode: 'New' | 'Edit' | 'View' = 'New';
   form: FormGroup;
   pokemon: Pokemon | null = null;
 
@@ -19,6 +19,7 @@ export class PokedexFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private toastController: ToastController
   ) {
+
     this.form = this.formBuilder.group({
       name: ['', Validators.required],
       hp: [, Validators.required],
@@ -52,9 +53,12 @@ export class PokedexFormComponent implements OnInit {
   cancel() {
     return this.modalCtrl.dismiss(null, 'cancel');
   }
+  remove(){
+    return this.modalCtrl.dismiss(null,'removed');
+  }
 
   confirm() {
-    if (this.form.valid) {
+    if (this.form.valid && this.mode != 'View') {
       const formData = this.form.value;
       const newPokemon: Pokemon = {
         id: this.pokemon ? this.pokemon.id : -1,
