@@ -19,13 +19,12 @@ export class HomePage {
   pokemonList: Pokemon[] = [];
   constructor(private pokemonSvc: PokemonService, private auth: AuthService) {}
   ngOnInit() {
-    this.pokemonSvc.getOne(1).subscribe((result: Pokemon) => {
-      this.pokemon = result;
-    });
     this.pokemonSvc.getAll().subscribe((result) => {
       result.data.map((individual: Pokemon) => {
         this.pokemonList.push(individual);
       });
+      var random = parseInt(Math.random() * this.pokemonList.length + '');
+      this.pokemon = this.pokemonList[random];
     });
   }
   onRandomClicked() {
