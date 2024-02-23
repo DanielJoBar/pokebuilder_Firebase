@@ -15,6 +15,7 @@ import { HttpClientProvider } from './core/servicies/http-client.provider';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { SharedModule } from './shared/shared.module';
 import { FilterPipe } from './shared/pipes/filter.pipe';
+import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 
 function AuthServiceFactory(jwtSvc: JwtService, apiSvc: ApiService) {
   return new AuthStrapiService(jwtSvc, apiSvc);
@@ -31,6 +32,12 @@ function HttpClientWebFactory(http: HttpClient) {
     AppRoutingModule,
     HttpClientModule,
     SharedModule,
+    TranslateModule.forRoot({
+      loader:{
+        provide: TranslateLoader,
+        useFactory: (TranslateService)
+      }
+    })
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

@@ -9,6 +9,7 @@ import { PokemonItemComponent } from './components/pokemon-item/pokemon-item.com
 import { PokemonTeamFormComponent } from './components/pokemon-team-form/pokemon-team-form.component';
 import { FilterPipe } from './pipes/filter.pipe';
 import { TranslatePipe } from './pipes/translate.pipe';
+import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 @NgModule({
   declarations: [
     UserSessionComponent,
@@ -19,7 +20,15 @@ import { TranslatePipe } from './pipes/translate.pipe';
     FilterPipe,
     TranslatePipe
   ],
-  imports: [CommonModule, IonicModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, IonicModule, FormsModule, ReactiveFormsModule
+  ,
+  TranslateModule.forChild({
+    loader:{
+      provide:TranslateLoader,
+      useFactory: (TranslateService)
+    }
+  })
+  ],
   exports: [
     FormsModule,
     IonicModule,
