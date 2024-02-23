@@ -14,6 +14,7 @@ import { HttpClientWebProvider } from './core/servicies/http-client-web.provider
 import { HttpClientProvider } from './core/servicies/http-client.provider';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { SharedModule } from './shared/shared.module';
+import { FilterPipe } from './shared/pipes/filter.pipe';
 
 function AuthServiceFactory(jwtSvc: JwtService, apiSvc: ApiService) {
   return new AuthStrapiService(jwtSvc, apiSvc);

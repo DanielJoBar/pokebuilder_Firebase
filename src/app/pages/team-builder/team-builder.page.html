@@ -1,11 +1,18 @@
 <ion-content>
   <div class="CrudButtons">
     <ion-button class="button" expand="full" (click)="onAddClicked()" ><ion-icon name="add-outline"></ion-icon></ion-button>
-    <ion-button id="minus" class="button" expand="full" (click)="onDeleteClicked()"><ion-icon  name="remove-outline"></ion-icon></ion-button>
+    <ion-button  class="button" expand="full" (click)="onDeleteClicked()"><ion-icon  name="remove-outline"></ion-icon></ion-button>
   </div>
+  <ion-input
+    type="text"
+    class="search-bar"
+    aria-placeholder="Buscar.."
+    [(ngModel)]="teamFilter"
+    name="teamFilter"
+  ></ion-input>
   <div class="Bloques">
     <app-pokemon-team
-      *ngFor="let team of pokemonsList"
+      *ngFor="let team of pokemonsList | filter:teamFilter"
       [team]="team"
       (onTeamCompClick)="onEditOrAddComp($event)"
       (teamIdEmiter)="getIdTeam($event)"

@@ -26,7 +26,7 @@ import { PokemonItemComponent } from 'src/app/shared/components/pokemon-item/pok
     TeamBuilderPage,
     PokemonTeamComponent,
     PokemonModalSelectComponent,
-    TeamCompComponent
+    TeamCompComponent,
   ],
 })
 export class TeamBuilderPageModule {}

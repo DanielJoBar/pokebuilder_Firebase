@@ -1,20 +1,32 @@
+
 <ion-content [fullscreen]="true">
-  <div class="CrudButtons">
-    <ion-button class="button" (click)="onPlusClicked()" expand="full"
-      ><ion-icon name="add-outline"></ion-icon>
-    </ion-button>
-    <ion-button class="button" expand="full" (click)="onMinusClicked()">
-      <ion-icon name="remove-outline"></ion-icon>
-    </ion-button>
-  </div>
-  <ion-grid>
-    <ion-col size="12">
-      <app-pokemon-item
-        *ngFor="let pokemon of pokemons"
-        [pokemon]="pokemon"
-        (onPokemonClicked)="onPokemonClicked(pokemon)"
-      >
-      </app-pokemon-item>
-    </ion-col>
-  </ion-grid>
+  <ion-content [fullscreen]="true" class="fondo">
+    <div class="CrudButtons">
+      <ion-input
+        type="text"
+        class="search-bar"
+        [(ngModel)]="pokedexFilter"
+        name="pokedexFilter"
+        expand="full"
+        >
+      </ion-input>
+      <ion-button class="button" (click)="onPlusClicked()" expand="full"
+        ><ion-icon name="add-outline"></ion-icon>
+      </ion-button>
+      <ion-button class="button" expand="full" (click)="onMinusClicked()">
+        <ion-icon name="remove-outline"></ion-icon>
+      </ion-button>
+    </div>
+    <ion-grid>
+      <ion-col size="12">
+        <app-pokemon-item
+          *ngFor="let pokemon of pokemons | filter:pokedexFilter"
+          [pokemon]="pokemon"
+          (onPokemonClicked)="onPokemonClicked(pokemon)"
+          name="list"
+        >
+        </app-pokemon-item>
+      </ion-col>
+    </ion-grid>
+  </ion-content>
 </ion-content>

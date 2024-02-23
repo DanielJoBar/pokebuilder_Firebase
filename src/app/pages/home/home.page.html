@@ -1,22 +1,21 @@
 <ion-content [fullscreen]="true" class="ion-padding">
   <div id="container">
     <ion-card>
-      <img
+      <ion-img
+      class="pokeball"
         alt="Silhouette of mountains"
-        src="https://ionicframework.com/docs/img/demos/card-media.png"
+        src="../../../assets/pokeball.png"
       />
-      <ion-card-header>
+      <ion-card-header class="ion-text-center" >
         <ion-card-title>{{pokemon!.attributes.name}}</ion-card-title>
       </ion-card-header>
-      <ion-card-content>
-        <ion-list>
-          <ion-item>
-            <ion-label>BST: {{pokemon!.attributes.bst}}</ion-label>
+      <ion-card-content class="ion-text-center">
+          <ion-item class="ion-text-center" lines="none" >
+            <ion-label fill ="clear">BST: {{pokemon!.attributes.bst}}</ion-label>
           </ion-item>
-        </ion-list>
       </ion-card-content>
-      <ion-button fill="clear" (click)="onRandomClicked()">
-        Click to randomize
+      <ion-button fill="clear" (click)="onRandomClicked()"  >
+        Haz click para randomizar
       </ion-button>
     </ion-card>
   </div>

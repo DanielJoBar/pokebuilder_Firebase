@@ -14,6 +14,7 @@ import { AuthService } from 'src/app/core/servicies/auth.service';
   styleUrls: ['./pokedex.page.scss'],
 })
 export class PokedexPage implements OnInit {
+  pokedexFilter='';
   pokemons: Pokemon[] = [];
   idUser: number | null = null;
   deletionMode: boolean = false;

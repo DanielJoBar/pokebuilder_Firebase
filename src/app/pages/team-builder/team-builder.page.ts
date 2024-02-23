@@ -18,6 +18,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
   styleUrls: ['./team-builder.page.scss'],
 })
 export class TeamBuilderPage implements OnInit {
+  teamFilter='';
   pokemons!: TeamData;
   pokemonsList: TeamData[] = [];
   User!: UserApi;

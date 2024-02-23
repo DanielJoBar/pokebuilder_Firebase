@@ -1,14 +1,45 @@
 ion-content{
     --padding-top: 54px;
+    --background: #2ca7ff;
+}
+.fondo{
+    --background: rgba(0, 0, 0, 0.600);
+    backdrop-filter:blur(10px);;
 }
 ion-grid{
     height: 100%;
     display:flex;
+    width: 80%;
+    margin-left: 10%;
+}
+ion-col{
+    background-color: #4fff3b9e;
+    border-radius: 5%;
+    border: 10px solid #D34442;
+    border-style:groove;
+    color: #fff;
+    text-align: center;
+}
+.search-bar{
+    background-color: rgba(0, 0, 0, 0.526);
+    width: 33%;
+    text-align: center;
+    height: 100%;
+    margin-top: 1%;
 }
 .CrudButtons{
-    columns: 2;
-    --padding-top: 54px;
+    display: inline-flex;
+    justify-content: center;
+    width: 80%;
+    margin-left: 10%;
+    height: 45px;
+    margin-top:5%
 }
 .button{
-    height: 45px;
+    width: 40%;
+    height: 100%;
+    --background: rgb(0, 0, 0);
+}
+app-pokemon-item{
+    width: 100%;
 }
