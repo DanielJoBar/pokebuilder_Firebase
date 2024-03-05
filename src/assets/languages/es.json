@@ -1,0 +1,62 @@
+{
+    "about":{
+        "student":"Estudiante de 2ºDam"
+    },
+    "userSession":{
+        "changeLanguage":"Cambiar idioma",
+        "spanish":"Español",
+        "english":"Inglés",
+        "french":"Francés",
+        "logOff":"Cerrar Sesión"
+        
+    },
+    "login":{
+        "access":"Acceder",
+        "email":"Correo Electrónico",
+        "password":"Contraseña",
+        "register":"Registrarse",
+        "registration":"Registro",
+        "name":"Nombre",
+        "surname":"Apellidos",
+        "username":"Nombre de cuenta",
+        "repeatPassword":"Repita contraseña",
+        "hasAccount":"¿Tienes ya una cuenta?",
+        "insertName":"Inserta tu nombre",
+        "insertSurname":"Inserte aquí su apellido/s"
+
+    },
+    "home":{
+        "randomize":"Haz click para randomizar"
+    },
+    
+    "pkdxForm":{
+        "title":"Crea un nuevo pokemon",
+        "cancel":"Cancelar",
+        "confirm":"Confirmar",
+        "remove":"Sacar del equipo",
+        "name":"Nombre del pokemon",
+        "hp":"Hp del pokemon",
+        "atk":"Ataque del pokemon",
+        "def":"Defensa del pokemon",
+        "speAtk":"Ataque especial del pokemon",
+        "speDef":"Defensa especial del pokemon",
+        "speed":"Velocidad del pokemon"
+    },
+    "pkmnModal":{
+        "select":"Selecciona un pokemon",
+        "close":"Cerrar"
+    },
+   
+    "pokemonTeam":{
+        "SelectPokemon":"Seleccione Pokemon"
+    },
+    "pkmnTForm":{
+        "create":"Crea un nuevo equipo",
+        "title":"El título del equipo"
+    },
+    "menu":{
+        "about":"Sobre mí",
+        "home":"Inicio",
+        "teams":"Equipos"
+    }
+}

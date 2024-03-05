@@ -1,0 +1,52 @@
+ion-content{
+    --padding-top: 54px;
+    --background: rgb(109, 186, 253);
+}
+.search-bar{
+    background-color: rgba(0, 0, 0, 0.526);
+    width: 33%;
+    text-align: center;
+    height: 100%;
+    margin-top: 0.3%;
+    display: inline-flex;
+}
+ion-icon{
+    height: 70%;
+    width: 15%;
+}
+.CrudButtons{
+    display: inline-flex;
+    justify-content: center;
+    width: 80%;
+    margin-left: 10%;
+    height: 45px;
+    margin-top:5%
+}
+.button{
+    width: 40%;
+    height: 100%;
+    --background: rgb(0, 0, 0);
+}
+app-pokemon-team{
+    width: calc(50% - 30%);
+    justify-content: center !important; 
+    align-items: center !important; 
+
+}
+.Bloques{
+    columns: 2;
+    --margin-top:0!important;
+    margin: 0;
+}
+.green {
+    --background: green;
+}
+  
+.red {
+    --background: red;
+}
+@media screen and (max-width: 1200px) {
+    .CrudButtons{
+        margin-top:0%;
+    }
+}

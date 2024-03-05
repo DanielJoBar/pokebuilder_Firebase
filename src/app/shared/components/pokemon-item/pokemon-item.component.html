@@ -1,0 +1,30 @@
+<ion-item (click)="onPokemonClick($event)" [button]="true" appSombra>
+  <ion-grid>
+    <ion-row size="12">
+      <ion-col size="5">
+        {{ pokemon.attributes.name }}
+      </ion-col>
+      <ion-col size="1" class="stat">
+        {{ pokemon.attributes.hp }}
+      </ion-col>
+      <ion-col size="1" class="stat">
+        {{ pokemon.attributes.atk }}
+      </ion-col>
+      <ion-col size="1" class="stat">
+        {{ pokemon.attributes.def }}
+      </ion-col>
+      <ion-col size="1" class="stat">
+        {{ pokemon.attributes.speAtk }}
+      </ion-col>
+      <ion-col size="1" class="stat">
+        {{ pokemon.attributes.speDef }}
+      </ion-col>
+      <ion-col size="1" class="stat">
+        {{ pokemon.attributes.speed }}
+      </ion-col>
+      <ion-col size="1" class="stat">
+        {{ pokemon.attributes.bst }}
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-item>

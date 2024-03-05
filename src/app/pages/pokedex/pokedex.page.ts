@@ -1,6 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { Pokemon } from 'src/app/core/interfaces/pokemon';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { IonModal, ModalController, ToastController } from '@ionic/angular';
 import { PokemonService } from 'src/app/core/servicies/pokemon.service';
+import { OverlayEventDetail } from '@ionic/core/components';
+import { PokedexFormComponent } from 'src/app/shared/components/pokedex-form/pokedex-form.component';
+import { Pokemon } from 'src/app/core/interfaces/pokemon';
+import { PokemonApi } from 'src/app/core/interfaces/pokemon-api';
+import { UserApi } from 'src/app/core/interfaces/user-api';
+import { AuthService } from 'src/app/core/servicies/auth.service';
 
 @Component({
   selector: 'app-pokedex',
@@ -8,12 +14,78 @@ import { PokemonService } from 'src/app/core/servicies/pokemon.service';
   styleUrls: ['./pokedex.page.scss'],
 })
 export class PokedexPage implements OnInit {
-
-  constructor(pokemons:PokemonService) { }
+  pokedexFilter = '';
+  pokemons: Pokemon[] = [];
+  idUser: number | null = null;
+  deletionMode: boolean = false;
+  creationMode: boolean = false;
+  constructor(
+    protected pokemonSvc: PokemonService,
+    private modalCtrl: ModalController,
+    private authSvc: AuthService
+  ) {}
 
   ngOnInit() {
+    this.authSvc.me().subscribe((result: UserApi) => {
+      var userId = result.id;
+      this.idUser = userId;
+      this.pokemonSvc.getTodo(userId).subscribe((result: PokemonApi) => {
+        this.pokemons = result.data;
+      });
+    });
   }
-  onPokemonClicked(pokemon:Pokemon){
-    
+
+  async onPlusClicked(pokemon?: Pokemon) {
+    this.creationMode = true;
+    const modal = await this.modalCtrl.create({
+      component: PokedexFormComponent,
+      componentProps: {
+        mode: pokemon ? 'Edit' : 'New',
+        pkm: pokemon,
+      },
+    });
+    modal.present();
+
+    const { data, role } = await modal.onWillDismiss();
+    if (role === 'New') {
+      this.pokemonSvc.createOne(data, this.idUser!).subscribe((_) => {
+        this.pokemonSvc
+          .getTodo(this.idUser!)
+          .subscribe((result: PokemonApi) => {
+            this.pokemons = result.data;
+            this.creationMode = false;
+          });
+      });
+      this.pokemonSvc.getTodo(this.idUser!).subscribe();
+      this.creationMode = false;
+    } else if (role === 'Edit') {
+      this.pokemonSvc.updateOne(data, this.idUser!).subscribe((_) => {
+        this.pokemonSvc
+          .getTodo(this.idUser!)
+          .subscribe((result: PokemonApi) => {
+            this.pokemons = result.data;
+            this.creationMode = false;
+          });
+      });
+    } else {
+      this.creationMode = false;
+    }
+  }
+  onPokemonClicked(pokemon: Pokemon) {
+    if (!this.deletionMode) {
+      this.onPlusClicked(pokemon);
+    } else {
+      this.deletionMode = false;
+      this.pokemonSvc.deleteOne(pokemon, this.idUser!).subscribe((_) => {
+        this.pokemonSvc
+          .getTodo(this.idUser!)
+          .subscribe((result: PokemonApi) => {
+            this.pokemons = result.data;
+          });
+      });
+    }
+  }
+  onMinusClicked() {
+    this.deletionMode = !this.deletionMode;
   }
 }

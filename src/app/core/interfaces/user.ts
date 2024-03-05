@@ -1,6 +1,11 @@
-export interface User{
+export interface User {
     id:number,
     name:string,
     surname:string,
-    age:number
+    age:number,
+    fav?:boolean,
+    picture?:string
 }
+
+
+

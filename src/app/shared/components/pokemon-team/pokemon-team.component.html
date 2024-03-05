@@ -1,0 +1,21 @@
+<ion-card class="mainCard" appSombra>
+  <ion-card-content >
+    <ion-list class="mainList" lines="none">
+      <ion-card class="secondaryCard">
+        <ion-card-header>
+          <ion-card-title>{{ team!.attributes!.title }}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-list class="secondaryList" lines="none">
+            <app-team-comp
+              *ngFor="let pokemon of pokemonList"
+              [receptor]="pokemon"
+              (click)="onTeamCompClicked(pokemon)"
+            >
+            </app-team-comp>
+          </ion-list>
+        </ion-card-content>
+      </ion-card>
+    </ion-list>
+  </ion-card-content>
+</ion-card>

@@ -1,0 +1,17 @@
+<ion-content class="ion-padding" [fullscreen]="true">
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>{{"pkmnModal.select" | translate}}</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="cancel()">{{"pkmnModal.close" | translate}}</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <app-pokemon-item
+            *ngFor = "let pokemons of list"
+            [pokemon] = "pokemons"
+            (onPokemonClicked) = "onPokemonSelected(pokemons)"
+        ></app-pokemon-item>
+      </ion-content>
+  </ion-content>

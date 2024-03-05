@@ -1,0 +1,171 @@
+<form
+  class="formulario"
+  *ngIf="showLoginForm && form"
+  [formGroup]="form"
+  (ngSubmit)="onSubmit()"
+  (key.enter)="onSubmit()"
+>
+  <ion-title>{{ "login.access" | translate }}</ion-title>
+  <ion-item>
+    <ion-grid>
+      <ion-row class="ion-align-items-center">
+        <ion-col size="4">
+          <label>{{ "login.email" | translate }}</label>
+        </ion-col>
+        <ion-col size="8">
+          <ion-input
+            placeholder="example@gmail.com"
+            labelPlacement="start"
+            formControlName="username"
+            type="text"
+          ></ion-input>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-item>
+  <ion-item>
+    <ion-grid>
+      <ion-row class="ion-align-items-center">
+        <ion-col size="4">
+          <label>{{ "login.password" | translate }}</label>
+        </ion-col>
+        <ion-col size="8">
+          <ion-input
+            placeholder="{{ 'login.password' | translate | lowercase }}"
+            labelPlacement="start"
+            formControlName="password"
+            type="password"
+          ></ion-input>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-item>
+  <div class="ion-text-end">
+    <ion-button
+      style="text-transform: none"
+      [disabled]="!form.valid"
+      (click)="onSubmit()"
+      >{{ "login.access" | translate }}</ion-button
+    >
+    <ion-button (click)="toggleForms()">{{
+      "login.register" | translate
+    }}</ion-button>
+  </div>
+</form>
+<form
+  *ngIf="!showLoginForm && showRegisterForm"
+  [formGroup]="registerForm"
+  (ngSubmit)="onRegisterSubmit()"
+>
+  <ion-title>{{ "login.registration" | translate }}</ion-title>
+  <div>
+    <ion-item>
+      <ion-grid>
+        <ion-row class="ion-align-items-center">
+          <ion-col size="4">
+            <label>{{ "login.name" | translate }}</label>
+          </ion-col>
+          <ion-col size="8">
+            <ion-input
+              placeholder="{{ 'login.insertName' | translate }}"
+              labelPlacement="start"
+              formControlName="name"
+              type="text"
+            ></ion-input>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+    <ion-item>
+      <ion-grid>
+        <ion-row class="ion-align-items-center">
+          <ion-col size="4">
+            <label>{{ "login.surname" | translate }}</label>
+          </ion-col>
+          <ion-col size="8">
+            <ion-input
+              placeholder="{{ 'login.insertSurname' | translate | lowercase}}"
+              labelPlacement="start"
+              formControlName="surname"
+              type="text"
+            ></ion-input>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+    <ion-item>
+      <ion-grid>
+        <ion-row class="ion-align-items-center">
+          <ion-col size="4">
+            <label>{{ "login.username" | translate }}</label>
+          </ion-col>
+          <ion-col size="8">
+            <ion-input
+              placeholder="{{ 'login.username' | translate | lowercase }}"
+              labelPlacement="start"
+              formControlName="username"
+              type="text"
+            ></ion-input>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+    <ion-item>
+      <ion-grid>
+        <ion-row class="ion-align-items-center">
+          <ion-col size="4">
+            <label>{{ "login.email" | translate }}</label>
+          </ion-col>
+          <ion-col size="8">
+            <ion-input
+              placeholder="example@gmail.com"
+              labelPlacement="start"
+              formControlName="email"
+              type="text"
+            ></ion-input>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+    <ion-item>
+      <ion-grid>
+        <ion-row class="ion-align-items-center">
+          <ion-col size="4">
+            <label>{{ "login.password" | translate }}</label>
+          </ion-col>
+          <ion-col size="8">
+            <ion-input
+              placeholder="{{ 'login.password' | translate | lowercase }}"
+              labelPlacement="start"
+              formControlName="password"
+              type="password"
+            ></ion-input>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+    <ion-item>
+      <ion-grid>
+        <ion-row class="ion-align-items-center">
+          <ion-col size="4">
+            <label>{{ "login.repeatPassword" | translate }}</label>
+          </ion-col>
+          <ion-col size="8">
+            <ion-input
+              placeholder="{{ 'login.repeatPassword' | translate | lowercase }}"
+              labelPlacement="start"
+              formControlName="confirm"
+              type="password"
+            ></ion-input>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+  </div>
+  <ion-button [disabled]="!registerForm.valid" (click)="onRegisterSubmit()"
+    >{{ "login.register" | translate }}
+  </ion-button>
+  <ion-button (click)="toggleForms()">{{
+    "login.hasAccount" | translate
+  }}</ion-button>
+</form>

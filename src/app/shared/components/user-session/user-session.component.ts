@@ -1,0 +1,29 @@
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+
+@Component({
+  selector: 'app-user-session',
+  templateUrl: './user-session.component.html',
+  styleUrls: ['./user-session.component.scss'],
+})
+export class UserSessionComponent  implements OnInit {
+  logoff:boolean|null = true;
+  logged:boolean =true;
+  languages:string[]=["Español", "Inglés", "Alemán"]
+  @Input() username:string = "Username"
+  @Output() onLogOffListener: EventEmitter<void> = new EventEmitter<void>()
+  @Output() onChangeLanguageListener: EventEmitter<string> = new EventEmitter<string>()
+  constructor() { }
+
+  ngOnInit() {}
+  ShowLogOff(){
+    this.logoff = true;
+  }
+  OnLogOff(){
+    this.onLogOffListener.emit()
+    this.logoff = false
+    this.logged = false
+  }
+  OnChangeLanguage(language:string){
+    this.onChangeLanguageListener.emit(language);
+  }
+}

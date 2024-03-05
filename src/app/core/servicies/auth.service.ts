@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { User } from '../interfaces/user';
+import { UserApi } from '../interfaces/user-api';
 
 @Injectable({
   providedIn: 'root',
@@ -11,17 +13,19 @@ export abstract class AuthService {
     false
   ); //Se pone por defeto a false
   isLogged$ = this._isLogged.asObservable();
+  protected _user = new BehaviorSubject<UserApi|null>(null);
+  public user$ = this._user.asObservable();
   //Un servicio de autor necesita distintos métodos
   /**
    * Busca a un usuario con las credenciales recibidas
    * en la base de datos y emite un observable de cualquier tipo
    * @param credenciales
    */
-  public abstract logIn(credenciales: Object): Observable<any>;
+  public abstract login(credenciales: Object): Observable<any>;
   /**
    * Cierra la sesión del usuario, no devuelve nada
    */
-  public abstract logOut(): void;
+  public abstract logout(): Observable<void>;
   /**
    * Crea un nuevo usuario en la base de datos,
    * requiere de los datos de un formulario para enviarlos por un

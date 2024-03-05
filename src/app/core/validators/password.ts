@@ -1,6 +1,7 @@
 import { AbstractControl, FormControl, ValidationErrors, ValidatorFn } from "@angular/forms";
 export class PasswordValidation {
     
+    //comprueba que la contraseña tenga un minimo de caracteres y de simbolos(8 carácteres)
     public static passwordProto(controlName:string=''): ValidatorFn {
         return (control: AbstractControl): ValidationErrors | null => {
             let password = '';
@@ -16,6 +17,8 @@ export class PasswordValidation {
             }  
         }
     }
+
+    //Comprueba que la contraseña passwordControlName coincide exactamente con confirmControlName
     public static passwordMatch(passwordControlName:string, confirmControlName:string):ValidatorFn{
         return (control: AbstractControl): ValidationErrors | null => {
             const password = control.get(passwordControlName)?.value;

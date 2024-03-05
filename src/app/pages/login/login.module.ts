@@ -5,12 +5,18 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { LoginPageRoutingModule } from './login-routing.module';
-import { LoginFormComponent } from 'src/app/shared/components/login-item/login-form.component';
-import { SharedModule } from 'src/app/shared/shared.module';
+import { LoginFormComponent } from 'src/app/shared/components/login-item/login-item.component';
 import { LoginPage } from './login.page';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
-  imports: [CommonModule, SharedModule, LoginPageRoutingModule],
+  imports: [
+    CommonModule, 
+    LoginPageRoutingModule,
+    IonicModule,
+    FormsModule,
+    SharedModule
+    ],
   declarations: [LoginPage, LoginFormComponent],
 })
 export class LoginPageModule {}

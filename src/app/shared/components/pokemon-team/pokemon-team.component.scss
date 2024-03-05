@@ -1,0 +1,36 @@
+.mainCard{
+    background-color: 0,0,0,0;
+    width:100%;
+    margin-top: 0!important;
+}
+.secondaryCard{
+    background: #DF4442;
+}
+.mainList{
+    --background: 0,0,0,0;
+}
+.secondaryList{
+    -ms-grid-column-span: 3;
+}
+
+app-team-comp{
+    width: calc(50% - 20px);
+    margin: 10px; 
+    display: inline-block;
+    vertical-align: top; 
+    box-sizing: border-box; 
+    justify-content: center !important; 
+    align-items: center !important; 
+    max-width: 170px;
+
+}
+ion-list{
+    inset: true;
+    background: 0,0,0,0;
+}
+@media screen and (min-width: 768px) {
+    
+    app-team-comp {
+      width: calc(33.33% - 20px);
+    }
+}

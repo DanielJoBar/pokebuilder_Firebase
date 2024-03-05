@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button color="danger"></ion-menu-button>
+    </ion-buttons>
+    <div slot="end" aria-hidden="true">
+      <ion-item (click)="ShowLogOff()" *ngIf="logged">
+        <ion-label>
+          <ion-button fill="clear" id="user-trigger">
+            {{ username | letraMayusculaLimitada }}
+            <ion-avatar aria-hidden="true" slot="start">
+              <img
+                alt=""
+                src="https://ionicframework.com/docs/img/demos/avatar.svg"
+              />
+            </ion-avatar>
+          </ion-button>
+        </ion-label>
+      </ion-item>
+    </div>
+  </ion-toolbar>
+  <ion-popover
+    aria-modal="true"
+    trigger="user-trigger"
+    triggeraction="click"
+    size="50px"
+    side="bottom"
+    alignment="center"
+    [backdropDismiss]="true"
+    [dismissOnSelect]="true"
+  >
+    <ng-template>
+      <ion-content>
+        <ion-list>
+          <ion-item id="language-trigger" button="true" detail="false">
+            {{ "userSession.changeLanguage" | translate }}
+          </ion-item>
+          <ion-item button="true" detail="false" (click)="OnLogOff()">
+            {{ "userSession.logOff" | translate }}
+          </ion-item>
+          <ion-popover
+            trigger="language-trigger"
+            [dismissOnSelect]="true"
+            side="end"
+          >
+            <ng-template>
+              <ion-content>
+                <ion-list>
+                  <ion-item
+                    [button]="true"
+                    [detail]="false"
+                    (click)="OnChangeLanguage('es')"
+                    >{{ "userSession.spanish" | translate }}</ion-item
+                  >
+                  <ion-item
+                    [button]="true"
+                    [detail]="false"
+                    (click)="OnChangeLanguage('en')"
+                    >{{ "userSession.english" | translate }}</ion-item
+                  >
+                  <ion-item
+                    [button]="true"
+                    [detail]="false"
+                    (click)="OnChangeLanguage('fr')"
+                    >{{ "userSession.french" | translate }}</ion-item
+                  >
+                </ion-list>
+              </ion-content>
+            </ng-template>
+          </ion-popover>
+        </ion-list>
+      </ion-content>
+    </ng-template>
+  </ion-popover>
+</ion-header>

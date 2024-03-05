@@ -1,0 +1,61 @@
+{
+    "about":{
+        "student":"2º DAM  student"
+    },
+    "userSession":{
+        "changeLanguage":"Change language",
+        "spanish":"Spanish",
+        "english":"English",
+        "french":"French",
+        "logOff":"Log off"
+        
+    },
+    "login":{
+        "access":"Access",
+        "email":"Email",
+        "password":"Password",
+        "register":"Register",
+        "registration":"Registration",
+        "name":"Name",
+        "surname":"Surname",
+        "username":"Username",
+        "repeatPassword":"Repeat password",
+        "hasAccount":"Already have an account?",
+        "insertName":"Insert your name",
+        "insertSurname":"Insert your surname"
+    },
+    "home":{
+        "randomize":"Click to randomize"
+    },
+    
+    "pkdxForm":{
+        "title":"Create a new Pokemon",
+        "cancel":"Cancel",
+        "confirm":"Confirm",
+        "remove":"Remove from team",
+        "name":"Pokemon's name",
+        "hp":"Pokemon's HP",
+        "atk":"Pokemon's Attack",
+        "def":"Pokemon's Defense",
+        "speAtk":"Pokemon's Special Attack",
+        "speDef":"Pokemon's Special Defense",
+        "speed":"Pokemon's Speed"
+    },
+    "pkmnModal":{
+        "select":"Select a Pokemon",
+        "close":"Close"
+    },
+   
+    "pokemonTeam":{
+        "SelectPokemon":"Select Pokemon"
+    },
+    "pkmnTForm":{
+        "create":"Create a new team",
+        "title":"Team title"
+    },
+    "menu":{
+        "about":"About me",
+        "home":"Home",
+        "teams":"Teams"
+    }
+}

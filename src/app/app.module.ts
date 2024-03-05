@@ -1,50 +1,67 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouteReuseStrategy, RouterModule } from '@angular/router';
+import { RouteReuseStrategy } from '@angular/router';
 
-import { IonicModule, IonicRouteStrategy, Platform } from '@ionic/angular';
+import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { HttpClientProvider } from './core/servicies/http-client.provider';
 import { AuthService } from './core/servicies/auth.service';
 import { JwtService } from './core/servicies/jwt.service';
 import { ApiService } from './core/servicies/api.service';
-import { HttpClientWebProvider } from './core/servicies/http-client-web.provider';
 import { AuthStrapiService } from './core/servicies/auth-strapi.service';
+import { HttpClientWebProvider } from './core/servicies/http-client-web.provider';
+import { HttpClientProvider } from './core/servicies/http-client.provider';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { SharedModule } from './shared/shared.module';
+import { FilterPipe } from './shared/pipes/filter.pipe';
+import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
+import {  createTranslateLoader } from './core/servicies/translation.service';
 
-export function httpProviderFactory(
-  http:HttpClient) {
+function AuthServiceFactory(jwtSvc: JwtService, apiSvc: ApiService) {
+  return new AuthStrapiService(jwtSvc, apiSvc);
+}
+function HttpClientWebFactory(http: HttpClient) {
   return new HttpClientWebProvider(http);
 }
 
-export function AuthServiceProvider(
-  jwt:JwtService,
-  api:ApiService
-) {
-  return new AuthStrapiService(jwt, api);
-}
 @NgModule({
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    SharedModule,
+    TranslateModule.forRoot({
+      loader:{
+        provide: TranslateLoader,
+        useFactory: (createTranslateLoader),
+        deps: [HttpClient]
+      }
+    })
   ],
-  declarations: [AppComponent],
-  providers:[
-    {provide:RouteReuseStrategy,useClass:IonicRouteStrategy},
+  providers: [
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     {
-      provide: HttpClientProvider,
-      deps:[HttpClient,Platform],
-      useFactory:httpProviderFactory
+      provide: AuthService,
+      deps: [JwtService, ApiService],
+      useFactory: AuthServiceFactory,
     },
     {
-      provide:AuthService,
-      deps:[JwtService,ApiService],
-      useFactory: AuthServiceProvider
-    }
+      provide: HttpClientProvider,
+      deps: [HttpClient],
+      useFactory: HttpClientWebFactory,
+    },
+    {
+      provide: 'login',
+      useValue: '/login',
+    },
+    {
+      provide: 'afterLogin',
+      useValue: '/home',
+    },
   ],
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

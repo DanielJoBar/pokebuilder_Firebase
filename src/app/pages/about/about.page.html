@@ -1,13 +1,22 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>about</ion-title>
-  </ion-toolbar>
-</ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">about</ion-title>
-    </ion-toolbar>
+  <ion-header [translucent]="false">
   </ion-header>
+  <ion-content [fullscreen]="true" >
+  <div id="container">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Daniel Jódar Barbero</ion-card-title>
+        <ion-card-subtitle>{{"about.student" | translate}}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-button fill="clear"
+        ><a href="github.com/DanielJoBar">Github</a></ion-button
+      >
+      <ion-button fill="clear"
+        ><a
+          href="AgHqCK0rN9uWCwAAAYxbJtuuUfCEbPJtnL_95Yi2WEjaqo69fzbgW3LOYsIlGhTB0Rftamr_7pdvzE6JxDibSUSy6oiYig"
+        ></a
+        >LinkedIn</ion-button
+      >
+    </ion-card>
+  </div>
 </ion-content>

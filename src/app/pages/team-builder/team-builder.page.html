@@ -1,13 +1,34 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>teamBuilder</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">teamBuilder</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <div class="CrudButtons">
+    <ion-input
+      type="text"
+      class="search-bar"
+      aria-placeholder="Buscar.."
+      [(ngModel)]="teamFilter"
+      name="teamFilter"
+      ><ion-icon name="search"></ion-icon
+    ></ion-input>
+    <ion-button 
+    class="button" 
+    expand="full" 
+    (click)="onAddClicked()"
+    [ngClass]="{ 'green': creationMode }"
+    ><ion-icon name="add-outline"></ion-icon>
+    </ion-button>
+    <ion-button 
+    class="button" expand="full" 
+    (click)="onDeleteEnable()" 
+    [ngClass]="{ 'red': deletionMode }"
+      ><ion-icon name="remove-outline"></ion-icon
+    ></ion-button>
+  </div>
+  <div class="Bloques" >
+    <app-pokemon-team
+      *ngFor="let team of pokemonsList | filter:teamFilter"
+      [team]="team"
+      (onTeamCompClick)="onTeamClicked($event,team.id)"
+      (click)="onDeleteClicked(team.id)"
+    >
+    </app-pokemon-team>
+  </div>
 </ion-content>

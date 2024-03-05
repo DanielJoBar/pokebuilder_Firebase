@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { AuthService } from './core/servicies/auth.service';
 import { Router } from '@angular/router';
+import { IonMenu } from '@ionic/angular';
+import { TranslationService } from './core/servicies/translation.service';
 
 @Component({
   selector: 'app-root',
@@ -8,16 +10,21 @@ import { Router } from '@angular/router';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
+  
+  currentLanguage:string="es";
 
-  constructor(
-    private auth:AuthService,
-    private router:Router
-  ) {
-    this.auth.isLogged$.subscribe(logged=>{
-      if(logged)
-        this.router.navigate(['/home']);
-      else
-        this.router.navigate(['/login']); 
+  constructor(protected auth: AuthService, private router: Router, private translate:TranslationService) {}
+  onSignOut(menu:IonMenu) {
+    this.auth.logout().subscribe(async (_) => {
+      await this.router.navigate(['/login']);
+      menu.close();
     });
+  }
+  isLoginPage(): boolean {
+    return this.router.url.includes('login');
+  }
+  onChangeLanguage(language:string){
+    this.currentLanguage = language;
+    this.translate.use(this.currentLanguage)
   }
 }

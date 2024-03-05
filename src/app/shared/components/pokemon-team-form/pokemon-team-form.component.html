@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="medium" (click)="cancel()">{{"pkdxForm.cancel" | translate}}</ion-button>
+    </ion-buttons>
+    <ion-title>{{"pkmnTForm.create" | translate}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="confirm()" [strong]="true">{{"pkdxForm.confirm" | translate}}</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <form [formGroup]="form" (ngSubmit)="confirm()">
+    <ion-item fill="outline">
+      <ion-input
+        class="texto"
+        formControlName="title"
+        labelPlacement="stacked"
+        label="título"
+        placeholder="{{'pkmnTForm.title' | translate}}"
+        type="text"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-button (click)="onPokemonSelected(1)" labelPlacement="stacked" label="pokemon 1" type="button">
+        {{ form.controls['pokemon1'].value ? form.controls['pokemon1'].value.attributes.name : ('pokemonTeam.SelectPokemon' | translate ) }}
+      </ion-button>
+    </ion-item>
+    <ion-item>
+      <ion-button (click)="onPokemonSelected(2)" labelPlacement="stacked" label="pokemon 2" type="button">
+        {{ form.controls['pokemon2'].value ? form.controls['pokemon2'].value.attributes.name : ('pokemonTeam.SelectPokemon' | translate ) }}
+      </ion-button>
+    </ion-item>
+    <ion-item>
+      <ion-button (click)="onPokemonSelected(3)" labelPlacement="stacked" label="pokemon 3" type="button">
+        {{ form.controls['pokemon3'].value ? form.controls['pokemon3'].value.attributes.name : ('pokemonTeam.SelectPokemon' | translate )}}
+      </ion-button>
+    </ion-item>
+    <ion-item>
+      <ion-button (click)="onPokemonSelected(4)" labelPlacement="stacked" label="pokemon 4" type="button">
+        {{ form.controls['pokemon4'].value ? form.controls['pokemon4'].value.attributes.name : ('pokemonTeam.SelectPokemon' | translate )}}
+      </ion-button>
+    </ion-item>
+    <ion-item>
+      <ion-button (click)="onPokemonSelected(5)" labelPlacement="stacked" label="pokemon 5" type="button">
+        {{ form.controls['pokemon5'].value ? form.controls['pokemon5'].value.attributes.name : ('pokemonTeam.SelectPokemon' | translate )}}
+      </ion-button>
+    </ion-item>
+    <ion-item>
+      <ion-button (click)="onPokemonSelected(6)" labelPlacement="stacked" label="pokemon 6" type="button">
+        {{ form.controls['pokemon6'].value ? form.controls['pokemon6'].value.attributes.name : ('pokemonTeam.SelectPokemon' | translate )}}
+      </ion-button>
+    </ion-item>
+  </form>
+</ion-content>

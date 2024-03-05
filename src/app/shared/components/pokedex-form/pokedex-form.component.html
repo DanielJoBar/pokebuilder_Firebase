@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="medium" (click)="cancel()">{{"pkdxForm.cancel" | translate}}</ion-button>
+    </ion-buttons>
+    <ion-title *ngIf="mode != 'View'">{{"pkdxForm.title" | translate}}</ion-title>
+    <ion-buttons slot="end" >
+      <ion-button (click)="confirm()" [strong]="true">{{ mode !== 'View' ? ("pkdxForm.confirm" | translate) : ("pkdxForm.remove"  | translate)}}</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <form [formGroup]="form" (ngSubmit)="confirm()">
+    <ion-item>
+      <ion-input
+        class="texto"
+        formControlName="name"
+        labelPlacement="stacked"
+        label="name"
+        placeholder="{{'pkdxForm.name' | translate }}"
+        type="text"
+        [readonly]="mode == 'View'"
+      ></ion-input>
+      <ion-input
+        formControlName="hp"
+        labelPlacement="stacked"
+        label="hp"
+        placeholder="{{'pkdxForm.hp' | translate }}"
+        type="number"
+        [readonly]="mode == 'View'"
+      ></ion-input>
+      <ion-input
+        formControlName="atk"
+        labelPlacement="stacked"
+        label="atk"
+        placeholder="{{'pkdxForm.atk' | translate }}"
+        type="number"
+        [readonly]="mode == 'View'"
+      ></ion-input>
+      <ion-input
+        formControlName="def"
+        labelPlacement="stacked"
+        label="def"
+        placeholder="{{'pkdxForm.def' | translate }}"
+        type="number"
+        [readonly]="mode == 'View'"
+      ></ion-input>
+      <ion-input
+        formControlName="speAtk"
+        labelPlacement="stacked"
+        label="speAtk"
+        placeholder="{{'pkdxForm.speAtk' | translate }}"
+        type="number"
+        [readonly]="mode == 'View'"
+      ></ion-input>
+      <ion-input
+        formControlName="speDef"
+        labelPlacement="stacked"
+        label="speDef"
+        placeholder="{{'pkdxForm.speDef' | translate }}"
+        type="number"
+        [readonly]="mode == 'View'"
+      ></ion-input>
+      <ion-input
+        formControlName="speed"
+        labelPlacement="stacked"
+        label="speed"
+        placeholder="{{'pkdxForm.speed' | translate }}"
+        type="number"
+        [readonly]="mode == 'View'"
+      ></ion-input>
+    </ion-item>
+    
+  </form>
+</ion-content>
