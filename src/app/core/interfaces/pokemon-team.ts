@@ -1,4 +1,4 @@
-import { Pokemon } from './pokemon';
+import { PokemonF } from './pokemon';
 import { PokemonApi } from './pokemon-api';
 import { UserApi } from './user-api';
 
@@ -20,4 +20,14 @@ export interface Attributes {
   pokemon_5: PokemonApi;
   pokemon_6: PokemonApi;
   user?:UserApi;
+}
+export interface TeamDataF{
+  title:string,
+  team_id:string,
+  pokemon_1:PokemonF;
+  pokemon_2:PokemonF;
+  pokemon_3:PokemonF;
+  pokemon_4:PokemonF;
+  pokemon_5:PokemonF;
+  pokemon_6:PokemonF;
 }

@@ -30,6 +30,7 @@
     "@ionic/angular": "^7.0.0",
     "@ngx-translate/core": "^15.0.0",
     "@ngx-translate/http-loader": "^8.0.0",
+    "firebase": "^10.8.1",
     "ionicons": "^7.0.0",
     "preferences": "^2.0.2",
     "rxjs": "~7.8.0",

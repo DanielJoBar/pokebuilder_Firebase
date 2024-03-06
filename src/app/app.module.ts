@@ -16,6 +16,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { SharedModule } from './shared/shared.module';
 import { FilterPipe } from './shared/pipes/filter.pipe';
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
+import { environment } from 'src/environments/environment';
 
 function AuthServiceFactory(jwtSvc: JwtService, apiSvc: ApiService) {
   return new AuthStrapiService(jwtSvc, apiSvc);
@@ -58,6 +59,9 @@ function HttpClientWebFactory(http: HttpClient) {
     {
       provide: 'afterLogin',
       useValue: '/home',
+    },
+    {
+      provide: 'firebase-config',useValue:environment.firebaseConfig
     },
   ],
   bootstrap: [AppComponent],
